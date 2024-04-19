@@ -1,15 +1,41 @@
 'use client'
+import { redHatDisplay, epilogue } from "@/lib/font";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+import ButtonStyle from "../button/button.style";
+
+// Import MUI Lib
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import Image from "next/image";
-import { redHatDisplay, epilogue } from "@/lib/font";
-import { useRouter } from "next/navigation";
-import ButtonStyle from "../button/button.style";
+import Divider from "@mui/material/Divider";
+import IconButton from "@mui/material/IconButton";
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import TwitterIcon from '@mui/icons-material/Twitter';
 
 const aboutMenu = ['Companies', 'Pricing', 'Terms', 'Advice', 'Privacy Policy'];
 const resourceMenu = ['Help Docs', 'Guide', 'Updates', 'Contact Us'];
+const socialMenu = [
+  {
+    id: 1,
+    icon: <FacebookIcon sx={{ color: 'white' }} />,
+  },
+  {
+    id: 2,
+    icon: <InstagramIcon sx={{ color: 'white' }} />,
+  },
+  {
+    id: 3,
+    icon: <LinkedInIcon sx={{ color: 'white' }} />,
+  },
+  {
+    id: 4,
+    icon: <TwitterIcon sx={{ color: 'white' }} />,
+  },
+]
 
 const AppFooter = () => {
   const router = useRouter();
@@ -21,6 +47,9 @@ const AppFooter = () => {
 
         <Box
           display={'flex'}
+          sx={{
+            flexDirection: { xs: 'column', md: 'row' }
+          }}
           justifyContent={"space-between"}
           gap={'5rem'}
         >
@@ -59,7 +88,13 @@ const AppFooter = () => {
           </Box>
 
           {/* Middle */}
-          <Box display={'flex'} gap={'93px'}>
+          <Box
+            display={'flex'}
+            sx={{
+              flexDirection: { xs: 'column', md: 'row' }
+            }}
+            gap={'93px'}
+          >
             <Box>
 
               <Typography sx={{
@@ -142,6 +177,40 @@ const AppFooter = () => {
             </Box>
           </Box>
 
+        </Box>
+
+        <Divider sx={{ mt: '80px', mb: '42px' }} color="#363944" />
+
+        <Box
+          display={'flex'}
+          sx={{
+            flexDirection: { xs: 'column', md: 'row' }
+          }}
+          alignItems={'center'}
+          justifyContent={'space-between'}
+          gap={5}
+        >
+          <Typography
+            sx={{
+              fontFamily: epilogue.style,
+              fontWeight: 500,
+              lineHeight: '160%',
+              color: '#8F9197',
+              textAlign: { xs: 'center', md: 'left' }
+            }}
+          >2021 @ JobHuntly. All rights reserved.</Typography>
+
+          <Box
+            display={'flex'}
+            alignItems={'center'}
+            gap={4}
+          >
+            {socialMenu.map(menu => (
+              <IconButton key={menu.id} sx={{ bgcolor: '#363944' }}>
+                {menu.icon}
+              </IconButton>
+            ))}
+          </Box>
         </Box>
       </Container>
 
