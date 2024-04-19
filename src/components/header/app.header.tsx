@@ -1,33 +1,29 @@
 'use client'
-import { styled, alpha } from '@mui/material/styles';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { redHatDisplay, epilogue } from '@/lib/font';
+import ButtonStyle from '../button/button.style';
+
+// Import MUI Lib
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import InputBase from '@mui/material/InputBase';
-import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import MoreIcon from '@mui/icons-material/MoreVert';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import AdbIcon from '@mui/icons-material/Adb';
 import Image from 'next/image';
+import Divider from '@mui/material/Divider';
 
 const pages = ['Find Jobs', 'Browse Companies'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+// const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 
 const AppHeader = () => {
-
+  const router = useRouter();
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
@@ -47,7 +43,7 @@ const AppHeader = () => {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: '#464d53' }}>
+    <AppBar position="static" sx={{ backgroundColor: 'transparent' }} elevation={0}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <IconButton sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
@@ -61,17 +57,19 @@ const AppHeader = () => {
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
+              fontFamily: redHatDisplay.style,
+              fontSize: '24px',
+              lineHeight: '36px',
               fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
+              color: '#25324B',
               textDecoration: 'none',
+              letterSpacing: '-0.24px',
+              cursor: 'pointer'
             }}
+            onClick={() => router.push('/')}
           >
             JobHuntly
           </Typography>
@@ -83,7 +81,6 @@ const AppHeader = () => {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
             >
               <MenuIcon />
             </IconButton>
@@ -107,9 +104,25 @@ const AppHeader = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography
+                    textAlign="center"
+                    sx={{
+                      fontFamily: epilogue.style,
+                      fontSize: '1rem',
+                      fontStyle: 'normal',
+                      fontWeight: '500',
+                      lineHeight: '160%',
+                      color: '#515B6F'
+                    }}
+                  >
+                    {page}
+                  </Typography>
                 </MenuItem>
               ))}
+              <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
+                <ButtonStyle outlined>Login</ButtonStyle>
+                <ButtonStyle>Sign up</ButtonStyle>
+              </Box>
             </Menu>
           </Box>
 
@@ -123,68 +136,59 @@ const AppHeader = () => {
           </IconButton>
 
           <Typography
-            variant="h5"
+            variant="h6"
             noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              fontFamily: 'monospace',
+              fontFamily: redHatDisplay.style,
+              fontSize: '24px',
+              lineHeight: '36px',
               fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
+              color: '#25324B',
               textDecoration: 'none',
+              letterSpacing: '-0.24px',
+              cursor: 'pointer'
             }}
+            onClick={() => router.push('/')}
           >
-            LOGO
+            JobHuntly
           </Typography>
+
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{
+                  my: 2,
+                  color: '#515B6F',
+                  display: 'block',
+                  fontFamily: epilogue.style,
+                  fontSize: '1rem',
+                  fontStyle: 'normal',
+                  fontWeight: '500',
+                  lineHeight: '160%',
+                  textTransform: 'capitalize'
+                }}
               >
                 {page}
               </Button>
             ))}
           </Box>
 
-          <Button>Login</Button>
-          <Button>Sign Up</Button>
-
-          <Box sx={{ flexGrow: 0 }}>
-            {/* <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu> */}
-
+          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+            <ButtonStyle outlined>Login</ButtonStyle>
+            <Divider
+              orientation='vertical'
+              variant="middle"
+              flexItem
+              sx={{ mx: '1rem' }}
+            />
+            <ButtonStyle>Sign up</ButtonStyle>
           </Box>
+
 
         </Toolbar>
       </Container>
