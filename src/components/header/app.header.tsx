@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { redHatDisplay, epilogue } from '@/lib/font';
 import ButtonStyle from '../button/button.style';
+import Link from 'next/link';
 
 // Import MUI Lib
 import AppBar from '@mui/material/AppBar';
@@ -18,7 +19,10 @@ import Button from '@mui/material/Button';
 import Image from 'next/image';
 import Divider from '@mui/material/Divider';
 
-const pages = ['Find Jobs', 'Browse Companies'];
+const pages = [
+  { id: 1, name: 'Find Jobs', path: '/find-job' },
+  { id: 2, name: 'Browse Companies', path: '/browse-companies' }
+];
 // const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 
@@ -103,20 +107,22 @@ const AppHeader = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography
-                    textAlign="center"
-                    sx={{
-                      fontFamily: epilogue.style,
-                      fontSize: '1rem',
-                      fontStyle: 'normal',
-                      fontWeight: '500',
-                      lineHeight: '160%',
-                      color: '#515B6F'
-                    }}
-                  >
-                    {page}
-                  </Typography>
+                <MenuItem key={page.id} onClick={handleCloseNavMenu}>
+                  <Link href={page.path} style={{ textDecoration: 'none' }}>
+                    <Typography
+                      textAlign="center"
+                      sx={{
+                        fontFamily: epilogue.style,
+                        fontSize: '1rem',
+                        fontStyle: 'normal',
+                        fontWeight: '500',
+                        lineHeight: '160%',
+                        color: '#515B6F',
+                      }}
+                    >
+                      {page.name}
+                    </Typography>
+                  </Link>
                 </MenuItem>
               ))}
               <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
@@ -158,23 +164,24 @@ const AppHeader = () => {
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{
-                  my: 2,
-                  color: '#515B6F',
-                  display: 'block',
-                  fontFamily: epilogue.style,
-                  fontSize: '1rem',
-                  fontStyle: 'normal',
-                  fontWeight: '500',
-                  lineHeight: '160%',
-                  textTransform: 'capitalize'
-                }}
-              >
-                {page}
-              </Button>
+              <Link key={page.id} href={page.path} style={{ textDecoration: 'none' }}>
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    my: 2,
+                    color: '#515B6F',
+                    display: 'block',
+                    fontFamily: epilogue.style,
+                    fontSize: '1rem',
+                    fontStyle: 'normal',
+                    fontWeight: '500',
+                    lineHeight: '160%',
+                    textTransform: 'capitalize',
+                  }}
+                >
+                  {page.name}
+                </Button>
+              </Link>
             ))}
           </Box>
 
