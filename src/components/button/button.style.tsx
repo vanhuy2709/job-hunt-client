@@ -23,7 +23,8 @@ const ButtonStyle = (props: IProps) => {
       },
       borderRadius: 0,
       padding: '12px 24px',
-      textTransform: 'capitalize'
+      textTransform: 'capitalize',
+      maxWidth: 'fit-content'
     }}>
       {children}
     </Button>

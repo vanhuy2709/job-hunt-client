@@ -21,9 +21,18 @@ const bull = (
 const BoxJobLatest = () => {
 
   return (
-    <Box py={'24px'} px={'40px'} bgcolor={'white'}>
-      <Stack direction={"row"} spacing={3}>
-        <Avatar src="/logo/logo-website.svg" sx={{ width: '64px', height: '64px' }} />
+    <Box
+      py={{ xs: '16px', md: '24px' }}
+      px={{ xs: '16px', md: '40px' }}
+      bgcolor={'white'}
+    >
+      <Stack direction={{ xs: 'column', md: 'row' }} spacing={3}>
+        <Avatar
+          src="/logo/logo-website.svg"
+          sx={{
+            width: { xs: '48px', md: '64px' },
+            height: { xs: '48px', md: '64px' }
+          }} />
 
         <Box>
           <Typography sx={{
@@ -43,7 +52,7 @@ const BoxJobLatest = () => {
           }}>
             Nomad{bull}Paris, France
           </Typography>
-          <Stack direction={"row"} spacing={2}>
+          <Stack direction={"row"} spacing={1}>
             <Chip label='Full-Time' sx={{
               color: '#56CDAD',
               backgroundColor: '#EFFAF7',

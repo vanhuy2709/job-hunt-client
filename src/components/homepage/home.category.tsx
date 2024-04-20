@@ -1,3 +1,4 @@
+'use client'
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -7,6 +8,7 @@ import BoxCategory from "../box/box.category";
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 const HomeCategory = () => {
+  const matches = useMediaQuery('(min-width:600px)');
 
   return (
     <Box pt={'72px'}>
@@ -19,7 +21,7 @@ const HomeCategory = () => {
           mb={'48px'}
         >
           <AppTitle subTitle="Explore by" mainTitle="category" />
-          <ButtonLink>Show all jobs</ButtonLink>
+          {matches ? (<ButtonLink>Show all jobs</ButtonLink>) : (<></>)}
         </Box>
 
         <Grid
@@ -53,7 +55,7 @@ const HomeCategory = () => {
           </Grid>
         </Grid>
 
-        <ButtonLink>Show all jobs</ButtonLink>
+        {matches ? (<></>) : (<ButtonLink>Show all jobs</ButtonLink>)}
 
       </Container>
     </Box>

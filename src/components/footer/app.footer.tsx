@@ -44,14 +44,13 @@ const AppFooter = () => {
     <Box sx={{ backgroundColor: '#202430', pt: '64px', pb: '44px' }}>
 
       <Container maxWidth={"xl"}>
-
         <Box
           display={'flex'}
           sx={{
             flexDirection: { xs: 'column', md: 'row' }
           }}
           justifyContent={"space-between"}
-          gap={'5rem'}
+          gap={{ xs: '1.5rem', md: '5rem' }}
         >
           {/* Left */}
           <Box>
@@ -91,7 +90,7 @@ const AppFooter = () => {
           <Box
             display={'flex'}
             sx={{
-              flexDirection: { xs: 'column', md: 'row' }
+              flexDirection: 'row'
             }}
             gap={'93px'}
           >
@@ -169,7 +168,11 @@ const AppFooter = () => {
               The latest job news, articles, sent to your inbox weekly.
             </Typography>
 
-            <Box display={'flex'} gap={'8px'}>
+            <Box
+              display={'flex'}
+              gap={'8px'}
+              flexDirection={{ xs: 'column', sm: 'row' }}
+            >
               <TextField variant="outlined" placeholder="Email Address" style={{
                 backgroundColor: 'white'
               }} />

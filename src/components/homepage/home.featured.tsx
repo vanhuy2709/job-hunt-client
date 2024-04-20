@@ -1,11 +1,15 @@
+'use client'
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import AppTitle from "../content/app.title";
 import ButtonLink from "../button/button.link";
 import BoxJobFeatured from "../box/box.job.featured";
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const HomeFeatured = () => {
+  const matches = useMediaQuery('(min-width:600px)');
+
   return (
     <Box my={'72px'}>
       <Container maxWidth={"xl"}>
@@ -18,11 +22,11 @@ const HomeFeatured = () => {
           mb={'48px'}
         >
           <AppTitle subTitle="Featured" mainTitle="jobs" />
-          <ButtonLink>Show all jobs</ButtonLink>
+          {matches ? (<ButtonLink>Show all jobs</ButtonLink>) : (<></>)}
         </Box>
 
         {/* List jobs featured */}
-        <Grid container spacing={2}>
+        <Grid container spacing={2} mb={{ xs: '24px', md: '0' }}>
           <Grid item xs={12} sm={6} md={4} lg={3}>
             <BoxJobFeatured />
           </Grid>
@@ -48,6 +52,8 @@ const HomeFeatured = () => {
             <BoxJobFeatured />
           </Grid>
         </Grid>
+
+        {matches ? (<></>) : (<ButtonLink>Show all jobs</ButtonLink>)}
 
       </Container>
     </Box>

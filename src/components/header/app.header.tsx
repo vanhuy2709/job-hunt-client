@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { redHatDisplay, epilogue } from '@/lib/font';
 import ButtonStyle from '../button/button.style';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 // Import MUI Lib
 import AppBar from '@mui/material/AppBar';
@@ -23,11 +24,10 @@ const pages = [
   { id: 1, name: 'Find Jobs', path: '/find-job' },
   { id: 2, name: 'Browse Companies', path: '/browse-companies' }
 ];
-// const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-
 
 const AppHeader = () => {
   const router = useRouter();
+  const pathname = usePathname();
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
@@ -108,7 +108,7 @@ const AppHeader = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page.id} onClick={handleCloseNavMenu}>
-                  <Link href={page.path} style={{ textDecoration: 'none' }}>
+                  <Link href={page.path} style={{ textDecoration: 'none', width: '100%' }}>
                     <Typography
                       textAlign="center"
                       sx={{
@@ -117,7 +117,7 @@ const AppHeader = () => {
                         fontStyle: 'normal',
                         fontWeight: '500',
                         lineHeight: '160%',
-                        color: '#515B6F',
+                        color: pathname === page.path ? '#4640DE' : '#515B6F',
                       }}
                     >
                       {page.name}
@@ -164,12 +164,16 @@ const AppHeader = () => {
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Link key={page.id} href={page.path} style={{ textDecoration: 'none' }}>
+              <Link
+                key={page.id}
+                href={page.path}
+                style={{ textDecoration: 'none' }}
+              >
                 <Button
                   onClick={handleCloseNavMenu}
                   sx={{
                     my: 2,
-                    color: '#515B6F',
+                    color: pathname === page.path ? '#4640DE' : '#515B6F',
                     display: 'block',
                     fontFamily: epilogue.style,
                     fontSize: '1rem',
