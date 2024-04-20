@@ -13,7 +13,7 @@ const AppTitle = (props: IProps) => {
   return (
     <Typography sx={{
       fontFamily: clashDisplay.style,
-      fontSize: '48px',
+      fontSize: { xs: '32px', md: '48px' },
       lineHeight: '110%',
       color: '#25324B'
     }}>

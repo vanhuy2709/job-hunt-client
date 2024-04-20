@@ -7,7 +7,7 @@ import { clashDisplay } from "@/lib/font";
 const BoxCategory = () => {
   return (
     <Box sx={{
-      p: '32px',
+      p: { xs: '16px', md: '32px' },
       border: 1,
       cursor: 'pointer',
       borderColor: '#D6DDEB',
@@ -18,30 +18,39 @@ const BoxCategory = () => {
       },
       "&:hover .icon": {
         color: 'white'
-      }
+      },
+      display: { xs: 'flex', sm: 'block' },
+      alignItems: { xs: 'center', sm: 'stretch' },
+      gap: { xs: '32px', sm: '0' }
     }}>
       <DesignServicesIcon
         className="icon"
         sx={{
-          mb: '32px',
-          width: '48px',
-          height: '48px',
+          mb: { xs: '0', sm: '32px' },
+          width: { xs: '40px', sm: '48px' },
+          height: { xs: '40px', sm: '48px' },
           color: '#4640DE'
         }} />
 
-      <Typography
-        sx={{
-          fontFamily: clashDisplay.style,
-          fontSize: '24px',
-          lineHeight: '120%',
-          mb: '12px'
-        }}>
-        Design
-      </Typography>
+      <Box>
+        <Typography
+          sx={{
+            fontFamily: clashDisplay.style,
+            fontSize: { xs: '20px', sm: '24px' },
+            lineHeight: '120%',
+            mb: { xs: '0', sm: '12px' }
+          }}>
+          Design
+        </Typography>
 
-      <Box display={'flex'} alignItems={'center'} gap={2}>
-        <Typography>235 jobs available</Typography>
-        <ArrowForwardIcon />
+        <Box
+          display={'flex'}
+          alignItems={'center'}
+          gap={2}
+        >
+          <Typography>235 jobs available</Typography>
+          <ArrowForwardIcon />
+        </Box>
       </Box>
     </Box>
   )

@@ -4,6 +4,7 @@ import Grid from "@mui/material/Grid";
 import AppTitle from "../content/app.title";
 import ButtonLink from "../button/button.link";
 import BoxCategory from "../box/box.category";
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const HomeCategory = () => {
 
@@ -21,7 +22,11 @@ const HomeCategory = () => {
           <ButtonLink>Show all jobs</ButtonLink>
         </Box>
 
-        <Grid container spacing={4}>
+        <Grid
+          container
+          spacing={{ xs: '16px', md: '32px' }}
+          mb={{ xs: '24px', md: '0' }}
+        >
           <Grid item xs={12} sm={6} md={4} lg={3}>
             <BoxCategory />
           </Grid>
@@ -47,6 +52,8 @@ const HomeCategory = () => {
             <BoxCategory />
           </Grid>
         </Grid>
+
+        <ButtonLink>Show all jobs</ButtonLink>
 
       </Container>
     </Box>

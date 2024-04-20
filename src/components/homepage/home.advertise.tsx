@@ -15,13 +15,22 @@ const HomeAdvertise = () => {
           opacity: 0.5,
           fontSize: '18px',
           lineHeight: '160%',
-          mb: '32px'
+          mb: '32px',
+          textAlign: { xs: 'center', sm: 'left' }
         }}>
           Companies we helped grow
         </Typography>
 
         {/* List companies */}
-        <Box display={'flex'} justifyContent={'space-between'}>
+        <Box
+          display={'flex'}
+          justifyContent={'space-between'}
+          alignItems={'center'}
+          gap={4}
+          sx={{
+            flexDirection: { xs: 'column', md: 'row' }
+          }}
+        >
           <Image
             src={'/company/vodafone-logo.svg'}
             alt="logo-website"

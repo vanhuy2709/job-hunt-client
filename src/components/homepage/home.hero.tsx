@@ -18,7 +18,7 @@ const HomeHero = () => {
         <Box mb={'23px'}>
           <Typography sx={{
             fontFamily: clashDisplay.style,
-            fontSize: '72px',
+            fontSize: { xs: '40px', sm: '50px', md: '65px', lg: '72px' },
             lineHeight: '110%',
             color: '#25324B'
           }}>
@@ -28,13 +28,24 @@ const HomeHero = () => {
             <br />
             <span style={{ color: '#26A4FF' }}>5000+ Jobs</span>
           </Typography>
-          <Image src={'/icons/line-vector.svg'} alt="" width={455} height={32} />
+          <Box sx={{
+            position: 'relative',
+            width: { xs: '250px', sm: '300px', md: '400px', lg: '455px' },
+            height: '32px'
+          }}>
+            <Image
+              src={'/icons/line-vector.svg'}
+              alt="line-vector"
+              fill
+              sizes="100%"
+            />
+          </Box>
         </Box>
 
         {/* Hero Desc */}
         <Typography sx={{
           fontFamily: epilogue.style,
-          fontSize: '20px',
+          fontSize: { xs: '14px', sm: '16px', md: '20px' },
           lineHeight: '160%',
           opacity: 0.7,
           mb: '23px'
@@ -47,20 +58,28 @@ const HomeHero = () => {
           display={'flex'}
           gap={2}
           mb={'16px'}
-          maxWidth={'fit-content'}
           boxShadow={5}
+          sx={{
+            flexDirection: { xs: 'column', md: 'row' },
+            maxWidth: { md: 'fit-content' }
+          }}
         >
-
           {/* Input Job */}
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <SearchIcon sx={{ mx: 2 }} />
-            <TextField label="Job title or keyword" variant="standard" />
+            <SearchIcon sx={{ mx: { xs: 1, sm: 2 } }} />
+            <TextField label="Job title or keyword" variant="standard"
+              sx={{
+                width: '100%'
+              }} />
           </Box>
 
           {/* Input Location */}
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <LocationOnIcon sx={{ mx: 2 }} />
-            <TextField label="Location" variant="standard" />
+            <LocationOnIcon sx={{ mx: { xs: 1, sm: 2 } }} />
+            <TextField label="Location" variant="standard"
+              sx={{
+                width: '100%'
+              }} />
           </Box>
 
           {/* Submit Search */}
@@ -71,9 +90,10 @@ const HomeHero = () => {
           opacity: 0.7,
           fontFamily: epilogue.style,
           fontWeight: 500,
+          fontSize: { xs: '12px', sm: '14px', md: '16px' },
           lineHeight: '160%',
         }}>
-          Popular : UI Designer, UX Researcher, Android, Admin
+          Popular :<br />UI Designer, UX Researcher, Android, Admin
         </Typography>
       </Container>
     </Box >

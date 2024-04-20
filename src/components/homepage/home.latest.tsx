@@ -1,5 +1,6 @@
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
 import AppTitle from "../content/app.title";
 import ButtonLink from "../button/button.link";
 import BoxJobLatest from "../box/box.job.latest";
@@ -20,9 +21,32 @@ const HomeLatest = () => {
         </Box>
 
         {/* List job latest */}
-        <Box>
-          <BoxJobLatest />
-        </Box>
+        <Grid container rowSpacing={2} columnSpacing={4}>
+          <Grid item xs={12} md={6}>
+            <BoxJobLatest />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <BoxJobLatest />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <BoxJobLatest />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <BoxJobLatest />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <BoxJobLatest />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <BoxJobLatest />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <BoxJobLatest />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <BoxJobLatest />
+          </Grid>
+        </Grid>
       </Container>
     </Box>
   )
