@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import Chip from "@mui/material/Chip";
 import Avatar from "@mui/material/Avatar";
 import { epilogue } from "@/lib/font";
+import Link from "next/link";
 
 const bull = (
   <Box
@@ -19,75 +20,79 @@ const bull = (
 const BoxJobFeatured = () => {
 
   return (
-    <Box sx={{
-      p: '24px',
-      border: 1,
-      cursor: 'pointer',
-      borderColor: '#D6DDEB',
-    }}>
+    <Link href={'/find-job/123'} style={{ textDecoration: 'none' }}>
 
-      <Box
-        display={'flex'}
-        justifyContent={'space-between'}
-        alignItems={'center'}
-        mb={'1rem'}
-      >
-        <Avatar src="/logo/logo-website.svg" />
+      <Box sx={{
+        p: '24px',
+        border: 1,
+        cursor: 'pointer',
+        borderColor: '#D6DDEB',
+      }}>
+
+        <Box
+          display={'flex'}
+          justifyContent={'space-between'}
+          alignItems={'center'}
+          mb={'1rem'}
+        >
+          <Avatar src="/logo/logo-website.svg" />
+          <Typography sx={{
+            fontFamily: epilogue.style,
+            lineHeight: '160%',
+            color: '#4640DE',
+            border: 1,
+            px: '12px',
+            py: '4px'
+          }}>
+            Full Time
+          </Typography>
+        </Box>
+
+        <Box mb={'1rem'}>
+          <Typography sx={{
+            fontFamily: epilogue.style,
+            fontSize: '18px',
+            fontWeight: 600,
+            lineHeight: '160%',
+            color: '#25324B'
+          }}>
+            Email Marketing
+          </Typography>
+
+          <Typography>Revolut{bull}Madrid, Spain</Typography>
+        </Box>
+
         <Typography sx={{
           fontFamily: epilogue.style,
           lineHeight: '160%',
-          color: '#4640DE',
-          border: 1,
-          px: '12px',
-          py: '4px'
+          mb: '1rem',
+          color: '#7C8493'
         }}>
-          Full Time
-        </Typography>
-      </Box>
-
-      <Box mb={'1rem'}>
-        <Typography sx={{
-          fontFamily: epilogue.style,
-          fontSize: '18px',
-          fontWeight: 600,
-          lineHeight: '160%'
-        }}>
-          Email Marketing
+          Revolut is looking for Email Marketing to help team ma ...
         </Typography>
 
-        <Typography>Revolut{bull}Madrid, Spain</Typography>
+        <Stack direction={'row'} spacing={1}>
+          <Chip
+            label='Marketing' sx={{
+              color: '#FFB836',
+              backgroundColor: '#FDF3EB',
+              fontFamily: epilogue.style,
+              fontSize: '14px',
+              fontWeight: 600,
+              lineHeight: '160%'
+            }} />
+          <Chip
+            label='Design' sx={{
+              color: '#56CDAD',
+              backgroundColor: '#EFFAF7',
+              fontFamily: epilogue.style,
+              fontSize: '14px',
+              fontWeight: 600,
+              lineHeight: '160%'
+            }} />
+        </Stack>
       </Box>
-
-      <Typography sx={{
-        fontFamily: epilogue.style,
-        lineHeight: '160%',
-        mb: '1rem',
-        color: '#7C8493'
-      }}>
-        Revolut is looking for Email Marketing to help team ma ...
-      </Typography>
-
-      <Stack direction={'row'} spacing={1}>
-        <Chip
-          label='Marketing' sx={{
-            color: '#FFB836',
-            backgroundColor: '#FDF3EB',
-            fontFamily: epilogue.style,
-            fontSize: '14px',
-            fontWeight: 600,
-            lineHeight: '160%'
-          }} />
-        <Chip
-          label='Design' sx={{
-            color: '#56CDAD',
-            backgroundColor: '#EFFAF7',
-            fontFamily: epilogue.style,
-            fontSize: '14px',
-            fontWeight: 600,
-            lineHeight: '160%'
-          }} />
-      </Stack>
-    </Box>
+    </Link>
   )
 }
 

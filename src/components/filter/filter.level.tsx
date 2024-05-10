@@ -1,20 +1,19 @@
+import { epilogue } from "@/lib/font";
 import { useState } from "react";
-import List from '@mui/material/List';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import Collapse from '@mui/material/Collapse';
-import Typography from '@mui/material/Typography';
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormGroup from '@mui/material/FormGroup';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-import { epilogue } from "@/lib/font";
+import Checkbox from "@mui/material/Checkbox";
+import Collapse from "@mui/material/Collapse";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormGroup from "@mui/material/FormGroup";
+import List from "@mui/material/List";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
+import Typography from "@mui/material/Typography";
 
-const listTypeOfElement = ['Full-time', 'Part-time', 'Remote', 'Internship', 'Contract']
+const listTypeOfElement = ['Entry Level', 'Mid Level', 'Senior Level', 'Director', 'VP or Above'];
 
-const FilterTypeEmployment = () => {
-
+const FilterLevel = () => {
   const [open, setOpen] = useState(true);
 
   const handleClick = () => {
@@ -31,7 +30,7 @@ const FilterTypeEmployment = () => {
             lineHeight: '150%',
             color: '#25324B',
           }}>
-            Type of Employment
+            Job Level
           </Typography>
         </ListItemText>
         {open ?
@@ -58,4 +57,4 @@ const FilterTypeEmployment = () => {
   )
 }
 
-export default FilterTypeEmployment
+export default FilterLevel;

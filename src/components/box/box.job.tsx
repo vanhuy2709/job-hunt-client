@@ -1,11 +1,12 @@
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Chip from "@mui/material/Chip";
-import Avatar from "@mui/material/Avatar";
-import Stack from "@mui/material/Stack";
-import Divider from "@mui/material/Divider";
-import { epilogue } from "@/lib/font";
-import Link from "next/link";
+import { epilogue } from '@/lib/font'
+import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
+import Chip from '@mui/material/Chip';
+import Divider from '@mui/material/Divider';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
+import { ButtonStyle } from '@/styles/ButtonStyle';
+import Link from 'next/link';
 
 const bull = (
   <Box
@@ -18,8 +19,7 @@ const bull = (
     }}>•</Box>
 );
 
-
-const BoxJobLatest = () => {
+const BoxJob = () => {
 
   return (
     <Link href={'/find-job/123'} style={{ textDecoration: 'none' }}>
@@ -27,6 +27,10 @@ const BoxJobLatest = () => {
         py={{ xs: '16px', md: '24px' }}
         px={{ xs: '16px', md: '40px' }}
         bgcolor={'white'}
+        border={'1px solid #D6DDEB'}
+        sx={{ cursor: 'pointer' }}
+        display={'flex'}
+        justifyContent={'space-between'}
       >
         <Stack direction={{ xs: 'column', md: 'row' }} spacing={3}>
           <Avatar
@@ -88,9 +92,13 @@ const BoxJobLatest = () => {
             </Stack>
           </Box>
         </Stack>
+
+        <Box>
+          <ButtonStyle>Apply</ButtonStyle>
+        </Box>
       </Box>
     </Link>
   )
 }
 
-export default BoxJobLatest
+export default BoxJob
