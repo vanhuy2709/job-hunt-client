@@ -1,3 +1,4 @@
+'use client'
 import Container from "@mui/material/Container"
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography";
@@ -10,8 +11,11 @@ import AppTextHeading from "@/components/content/app.text.heading";
 import AppSubtitle from "@/components/content/app.subtitle";
 import ButtonStyle from "@/components/button/button.style";
 import { epilogue } from "@/lib/font";
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const BrowseHero = () => {
+
+  const matches = useMediaQuery('(min-width:600px)');
 
   return (
     <Box bgcolor={'#F8F8FD'} py={'65px'}>
@@ -24,6 +28,7 @@ const BrowseHero = () => {
           p={'24px'}
           boxShadow={2}
           display={'flex'}
+          flexDirection={{ xs: 'column', sm: 'row' }}
           gap={'20px'}
           mb={'16px'}
         >
@@ -34,7 +39,10 @@ const BrowseHero = () => {
             <TextField label="Company name or keyword" variant="standard" fullWidth />
           </Box>
 
-          <Divider orientation="vertical" variant="middle" flexItem />
+          {matches ?
+            (<Divider orientation="vertical" variant="middle" flexItem />)
+            :
+            (<></>)}
 
           <Box sx={{ display: 'flex', alignItems: 'flex-end', flex: 1 }}>
             <LocationOnIcon sx={{ mx: { xs: 1, sm: 2 }, my: 0.5 }} />

@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import JobDetailHeader from "@/components/job/job.detail.header";
-import AppHeadline from "@/components/content/app.headline";
+import JobDetailDesc from "@/components/job/job.detail.desc";
 
 const JobDescription = () => {
 
@@ -18,7 +18,7 @@ const JobDescription = () => {
 
       <Box>
         <Container maxWidth='xl' sx={{ py: '72px' }}>
-          <AppHeadline text="Description" />
+          <JobDetailDesc />
         </Container>
       </Box>
     </>

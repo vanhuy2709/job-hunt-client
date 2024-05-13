@@ -30,7 +30,10 @@ const BoxJob = () => {
         border={'1px solid #D6DDEB'}
         sx={{ cursor: 'pointer' }}
         display={'flex'}
+        flexDirection={{ xs: 'column', sm: 'row' }}
         justifyContent={'space-between'}
+        alignItems={{ xs: 'unset', sm: 'center' }}
+        gap={2}
       >
         <Stack direction={{ xs: 'column', md: 'row' }} spacing={3}>
           <Avatar
@@ -59,7 +62,7 @@ const BoxJob = () => {
             }}>
               Nomad{bull}Paris, France
             </Typography>
-            <Stack direction={"row"} spacing={1}>
+            <Stack direction={"row"} spacing={1} useFlexGap flexWrap={'wrap'}>
               <Chip label='Full-Time' sx={{
                 color: '#56CDAD',
                 backgroundColor: '#EFFAF7',
@@ -93,9 +96,9 @@ const BoxJob = () => {
           </Box>
         </Stack>
 
-        <Box>
-          <ButtonStyle>Apply</ButtonStyle>
-        </Box>
+        {/* <Box> */}
+        <ButtonStyle>Apply</ButtonStyle>
+        {/* </Box> */}
       </Box>
     </Link>
   )

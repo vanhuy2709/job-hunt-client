@@ -1,3 +1,4 @@
+'use client'
 import Container from "@mui/material/Container"
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography";
@@ -10,8 +11,11 @@ import AppTextHeading from "../content/app.text.heading";
 import AppSubtitle from "../content/app.subtitle";
 import ButtonStyle from "../button/button.style";
 import { epilogue } from "@/lib/font";
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const FindJobHero = () => {
+
+  const matches = useMediaQuery('(min-width:600px)');
 
   return (
     <Box bgcolor={'#F8F8FD'} py={'65px'}>
@@ -24,17 +28,27 @@ const FindJobHero = () => {
           p={'24px'}
           boxShadow={2}
           display={'flex'}
+          flexDirection={{ xs: 'column', sm: 'row' }}
           gap={'20px'}
           mb={'16px'}
         >
 
           {/* Input 1 */}
-          <Box sx={{ display: 'flex', alignItems: 'flex-end', flex: 1 }}>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'flex-end',
+              flex: 1,
+            }}
+          >
             <SearchIcon sx={{ mx: { xs: 1, sm: 2 }, my: 0.5 }} />
             <TextField label="Job title or keyword" variant="standard" fullWidth />
           </Box>
 
-          <Divider orientation="vertical" variant="middle" flexItem />
+          {matches ?
+            (<Divider orientation="vertical" variant="middle" flexItem />)
+            :
+            (<></>)}
 
           <Box sx={{ display: 'flex', alignItems: 'flex-end', flex: 1 }}>
             <LocationOnIcon sx={{ mx: { xs: 1, sm: 2 }, my: 0.5 }} />

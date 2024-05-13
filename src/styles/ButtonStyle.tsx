@@ -11,7 +11,7 @@ export const ButtonStyle = styled.button`
   border-radius: 0;
   padding: 12px 50px;
   text-transform: capitalize;
-  max-width: fit-content;
+  /* max-width: fit-content; */
   color: white;
   border: none;
   cursor: pointer;

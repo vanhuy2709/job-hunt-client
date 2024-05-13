@@ -16,6 +16,8 @@ const AppTextHeading = (props: IProps) => {
     <Box
       display={'flex'}
       justifyContent={'center'}
+      flexDirection={{ xs: 'column', sm: 'column', md: 'row' }}
+      alignItems={{ xs: 'center', sm: 'center', md: 'baseline' }}
       gap={2}
       mb={'24px'}
     >
@@ -29,12 +31,12 @@ const AppTextHeading = (props: IProps) => {
         {subText}{' '}
       </Typography>
 
-      <Box>
+      <Box textAlign={'center'}>
         <Typography variant="h2" sx={{
           fontFamily: clashDisplay.style,
           fontSize: '48px',
           lineHeight: '110%',
-          color: '#26A4FF'
+          color: '#26A4FF',
         }}>
           {mainText}
         </Typography>

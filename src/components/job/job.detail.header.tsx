@@ -7,6 +7,7 @@ import Link from "next/link";
 import { ButtonStyle } from "@/styles/ButtonStyle";
 import AppHeadline from "../content/app.headline";
 import { epilogue } from "@/lib/font";
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const bull = (
   <Box
@@ -20,6 +21,7 @@ const bull = (
 );
 
 const JobDetailHeader = () => {
+  const matches = useMediaQuery('(min-width:600px)');
 
   return (
     <Box>
@@ -43,23 +45,25 @@ const JobDetailHeader = () => {
           border: '1px solid #D6DDEB',
           p: '24px',
           display: 'flex',
+          flexDirection: { xs: 'column', sm: 'row' },
           justifyContent: 'space-between',
-          alignItems: 'center'
+          alignItems: { xs: 'unset', sm: 'center' }
         }}
       >
         <Box sx={{
           display: 'flex',
-          alignItems: 'center',
+          flexDirection: { xs: 'column', sm: 'row' },
+          alignItems: { xs: 'unset', sm: 'center' },
           gap: '24px'
         }}>
           <Image
             src={'/logo/logo-website.svg'}
             alt="logo-company"
-            width={80}
-            height={80}
+            width={matches ? 80 : 50}
+            height={matches ? 80 : 50}
           />
           <Box>
-            <AppHeadline text="Social Media Assistant"></AppHeadline>
+            <AppHeadline text="Social Media Assistant" />
             <Typography sx={{
               fontFamily: epilogue.style,
               lineHeight: '160%',
@@ -71,9 +75,9 @@ const JobDetailHeader = () => {
           </Box>
         </Box>
 
-        <Box>
-          <ButtonStyle>Apply</ButtonStyle>
-        </Box>
+        {/* <Box> */}
+        <ButtonStyle>Apply</ButtonStyle>
+        {/* </Box> */}
       </Box>
     </Box>
   )
