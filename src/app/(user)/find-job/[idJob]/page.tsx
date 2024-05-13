@@ -1,9 +1,12 @@
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
+import Divider from "@mui/material/Divider";
 import JobDetailHeader from "@/components/job/job.detail.header";
 import JobDetailDesc from "@/components/job/job.detail.desc";
+import JobDetailCompany from "@/components/job/job.detail.company";
+import HomeLatest from "@/components/homepage/home.latest";
 
-const JobDescription = () => {
+const JobDetail = () => {
 
   return (
     <>
@@ -17,12 +20,15 @@ const JobDescription = () => {
       </Box>
 
       <Box>
-        <Container maxWidth='xl' sx={{ py: '72px' }}>
+        <Container maxWidth='xl'>
           <JobDetailDesc />
+          <Divider />
+          <JobDetailCompany />
         </Container>
+        <HomeLatest />
       </Box>
     </>
   )
 }
 
-export default JobDescription
+export default JobDetail

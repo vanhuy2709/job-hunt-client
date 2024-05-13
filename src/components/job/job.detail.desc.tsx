@@ -13,6 +13,7 @@ const JobDetailDesc = () => {
       direction={{ xs: 'column', sm: 'column', md: 'row' }}
       spacing={'64px'}
       justifyContent={'space-between'}
+      py={'72px'}
     >
       <Stack direction={"column"} spacing={'40px'} flex={2}>
         <Box>
