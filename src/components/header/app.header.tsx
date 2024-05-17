@@ -5,6 +5,11 @@ import { redHatDisplay, epilogue } from '@/lib/font';
 import ButtonStyle from '../button/button.style';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useSession, signIn, signOut } from "next-auth/react";
+
+// Imports the Meet library
+
+
 
 // Import MUI Lib
 import AppBar from '@mui/material/AppBar';
@@ -19,6 +24,7 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Image from 'next/image';
 import Divider from '@mui/material/Divider';
+import Avatar from '@mui/material/Avatar';
 
 const pages = [
   { id: 1, name: 'Find Jobs', path: '/find-job' },
@@ -26,10 +32,13 @@ const pages = [
 ];
 
 const AppHeader = () => {
+
+  const { data: session } = useSession()
   const router = useRouter();
   const pathname = usePathname();
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorElUser);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -50,7 +59,7 @@ const AppHeader = () => {
     <AppBar position="static" sx={{ backgroundColor: 'transparent' }} elevation={0}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <IconButton sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
+          <IconButton sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} onClick={() => router.push('/')}>
             <Image
               src={'/logo/logo-website.svg'}
               alt='logo-website'
@@ -190,14 +199,54 @@ const AppHeader = () => {
           </Box>
 
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <ButtonStyle outlined>Login</ButtonStyle>
+            {
+              session ?
+                // <Avatar>H</Avatar>
+                <>
+                  <Button onClick={handleOpenUserMenu}>
+                    {/* @ts-ignore */}
+                    <Avatar src={session?.user?.image} alt="Remy Sharp" />
+                  </Button>
+                  <Menu
+                    anchorEl={anchorElUser}
+                    open={open}
+                    onClose={handleCloseUserMenu}
+                    MenuListProps={{
+                      'aria-labelledby': 'basic-button',
+                    }}
+                  >
+                    {/* <MenuItem onClick={() => callCreateSpace()}>Profile</MenuItem> */}
+                    <MenuItem onClick={handleCloseUserMenu}>My account</MenuItem>
+                    <MenuItem onClick={() => {
+                      handleCloseUserMenu();
+                      signOut();
+                    }}>Logout</MenuItem>
+                  </Menu>
+                </>
+                :
+                <>
+                  <Link href={'/api/auth/signin'} style={{ textDecoration: 'unset', color: '#4640DE' }}>
+                    <ButtonStyle outlined>
+                      Login
+                    </ButtonStyle>
+                  </Link>
+                  <Divider
+                    orientation='vertical'
+                    variant="middle"
+                    flexItem
+                    sx={{ mx: '1rem' }}
+                  />
+                  <ButtonStyle>Sign up</ButtonStyle>
+                </>
+            }
+            {/* <ButtonStyle outlined>Login</ButtonStyle>
             <Divider
               orientation='vertical'
               variant="middle"
               flexItem
               sx={{ mx: '1rem' }}
             />
-            <ButtonStyle>Sign up</ButtonStyle>
+            <ButtonStyle>Sign up</ButtonStyle> */}
           </Box>
 
 

@@ -18,8 +18,11 @@ const bull = (
     }}>•</Box>
 );
 
-
-const BoxJobLatest = () => {
+interface IProps {
+  item: IJob;
+}
+const BoxJobLatest = (props: IProps) => {
+  const { item } = props;
 
   return (
     <Link href={'/find-job/123'} style={{ textDecoration: 'none' }}>
@@ -30,7 +33,7 @@ const BoxJobLatest = () => {
       >
         <Stack direction={{ xs: 'column', md: 'row' }} spacing={3}>
           <Avatar
-            src="/logo/logo-website.svg"
+            src={`http://localhost:8000/images/company/${item.company.logo}`}
             sx={{
               width: { xs: '48px', md: '64px' },
               height: { xs: '48px', md: '64px' }
@@ -45,7 +48,7 @@ const BoxJobLatest = () => {
               mb: 1,
               color: '#25324B'
             }}>
-              Social Media Assistant
+              {item.name}
             </Typography>
             <Typography sx={{
               fontFamily: epilogue.style,
@@ -53,7 +56,7 @@ const BoxJobLatest = () => {
               color: '#515B6F',
               mb: 1
             }}>
-              Nomad{bull}Paris, France
+              {item.company.name}{bull}{item.location}
             </Typography>
             <Stack direction={"row"} spacing={1}>
               <Chip label='Full-Time' sx={{
@@ -67,24 +70,20 @@ const BoxJobLatest = () => {
 
               <Divider orientation="vertical" flexItem />
 
-              <Chip label="Marketing" sx={{
-                color: '#FFB836',
-                backgroundColor: 'transparent',
-                fontFamily: epilogue.style,
-                fontSize: '14px',
-                fontWeight: 600,
-                lineHeight: '160%',
-                border: 1
-              }} />
-              <Chip label="Design " sx={{
-                color: '#4640DE',
-                backgroundColor: 'transparent',
-                fontFamily: epilogue.style,
-                fontSize: '14px',
-                fontWeight: 600,
-                lineHeight: '160%',
-                border: 1
-              }} />
+              {item.skills.map((skill, index) => {
+                if (index < 2) {
+                  return (
+                    <Chip key={skill} label={skill} sx={{
+                      color: '#FFB836',
+                      backgroundColor: 'transparent',
+                      fontFamily: epilogue.style,
+                      fontSize: '14px',
+                      fontWeight: 600,
+                      lineHeight: '160%',
+                      border: 1
+                    }} />)
+                }
+              })}
             </Stack>
           </Box>
         </Stack>

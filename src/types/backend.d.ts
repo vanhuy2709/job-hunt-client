@@ -3,6 +3,112 @@ export { };
 
 declare global {
 
+  interface ISkill {
+    _id: string,
+    name: string,
+    createdBy: {
+      _id: string,
+      email: string
+    },
+    deletedAt: null,
+    isDeleted: boolean,
+    createdAt: string,
+    updatedAt: string,
+    updatedBy: {
+      _id: string,
+      name: string
+    }
+  }
+
+  interface IHistory {
+    status: string,
+    updatedAt: string,
+    updatedBy: {
+      _id: string,
+      email: string
+    }
+  }
+
+  interface IResume {
+    _id: string,
+    email: string,
+    userId: string,
+    url: string,
+    status: string,
+    companyId: string,
+    jobId: string,
+    history: IHistory[],
+    createdBy: {
+      _id: string,
+      email: string
+    },
+    deletedAt: string,
+    isDeleted: boolean,
+    createdAt: string,
+    updatedAt: string,
+  }
+
+  interface IUser {
+    _id: string,
+    name: string,
+    email: string,
+    age: number,
+    gender: string,
+    address: string,
+    role: {
+      _id: string,
+      name: string
+    },
+    deletedAt: string,
+    isDeleted: boolean,
+    createdAt: string,
+    updatedAt: string,
+    refreshToken: string
+  }
+
+  interface IJob {
+    _id: string,
+    name: string,
+    skills: string[],
+    company: {
+      _id: string,
+      name: string,
+      logo: string
+    },
+    location: string,
+    salary: number,
+    quantity: number,
+    level: string,
+    description: string,
+    startDate: string,
+    endDate: string,
+    isActive: boolean,
+    createdBy: {
+      _id: string,
+      email: string
+    },
+    isDeleted: boolean,
+    deletedAt: string,
+    createdAt: string,
+    updatedAt: string,
+  }
+
+  interface ICompany {
+    _id: string,
+    name: string,
+    address: string,
+    description: string,
+    logo: string,
+    createdBy: {
+      _id: string,
+      email: string
+    },
+    isDeleted: boolean,
+    deletedAt: string,
+    createdAt: string,
+    updatedAt: string,
+  }
+
   interface IRequest {
     url: string;
     method: string;

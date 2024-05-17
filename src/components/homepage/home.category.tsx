@@ -7,8 +7,13 @@ import ButtonLink from "../button/button.link";
 import BoxCategory from "../box/box.category";
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-const HomeCategory = () => {
+interface IProps {
+  data: ISkill[] | undefined;
+}
+
+const HomeCategory = (props: IProps) => {
   const matches = useMediaQuery('(min-width:600px)');
+  const { data } = props;
 
   return (
     <Box pt={'72px'}>
@@ -29,30 +34,11 @@ const HomeCategory = () => {
           spacing={{ xs: '16px', md: '32px' }}
           mb={{ xs: '24px', md: '0' }}
         >
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <BoxCategory />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <BoxCategory />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <BoxCategory />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <BoxCategory />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <BoxCategory />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <BoxCategory />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <BoxCategory />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <BoxCategory />
-          </Grid>
+          {data && data?.length > 0 && data?.map(item => (
+            <Grid item xs={12} sm={6} md={4} lg={3} key={item._id}>
+              <BoxCategory item={item} />
+            </Grid>
+          ))}
         </Grid>
 
         {matches ? (<></>) : (<ButtonLink>Show all jobs</ButtonLink>)}

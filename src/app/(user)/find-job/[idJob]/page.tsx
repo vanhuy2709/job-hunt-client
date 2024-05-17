@@ -10,10 +10,7 @@ const JobDetail = () => {
 
   return (
     <>
-      <Box
-        bgcolor={'#F8F8FD'}
-        py={'40px'}
-      >
+      <Box bgcolor={'#F8F8FD'} py={'40px'}>
         <Container maxWidth='xl'>
           <JobDetailHeader />
         </Container>

@@ -7,8 +7,12 @@ import ButtonLink from "../button/button.link";
 import BoxJobLatest from "../box/box.job.latest";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-const HomeLatest = () => {
+interface IProps {
+  data: IJob[] | undefined;
+}
+const HomeLatest = (props: IProps) => {
   const matches = useMediaQuery('(min-width:600px)');
+  const { data } = props;
 
   return (
     <Box pt={'72px'} pb={'60px'} bgcolor={'#F8F8FD'}>
@@ -26,30 +30,11 @@ const HomeLatest = () => {
 
         {/* List job latest */}
         <Grid container rowSpacing={2} columnSpacing={4} mb={{ xs: '24px', md: '0' }}>
-          <Grid item xs={12} md={6}>
-            <BoxJobLatest />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <BoxJobLatest />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <BoxJobLatest />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <BoxJobLatest />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <BoxJobLatest />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <BoxJobLatest />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <BoxJobLatest />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <BoxJobLatest />
-          </Grid>
+          {data && data.length > 0 && data.map(item => (
+            <Grid item xs={12} md={6} key={item._id}>
+              <BoxJobLatest item={item} />
+            </Grid>
+          ))}
         </Grid>
 
         {matches ? (<></>) : (<ButtonLink>Show all jobs</ButtonLink>)}

@@ -17,7 +17,11 @@ const bull = (
     }}>•</Box>
 );
 
-const BoxJobFeatured = () => {
+interface IProps {
+  item: IJob;
+}
+const BoxJobFeatured = (props: IProps) => {
+  const { item } = props;
 
   return (
     <Link href={'/find-job/123'} style={{ textDecoration: 'none' }}>
@@ -35,7 +39,7 @@ const BoxJobFeatured = () => {
           alignItems={'center'}
           mb={'1rem'}
         >
-          <Avatar src="/logo/logo-website.svg" />
+          <Avatar src={`http://localhost:8000/images/company/${item.company.logo}`} alt="logo-company" />
           <Typography sx={{
             fontFamily: epilogue.style,
             lineHeight: '160%',
@@ -56,44 +60,50 @@ const BoxJobFeatured = () => {
             lineHeight: '160%',
             color: '#25324B'
           }}>
-            Email Marketing
+            {item.name}
           </Typography>
 
-          <Typography>Revolut{bull}Madrid, Spain</Typography>
+          <Typography>{item.company.name}{bull}{item.location}</Typography>
         </Box>
 
-        <Typography sx={{
+        {/* <Typography sx={{
           fontFamily: epilogue.style,
           lineHeight: '160%',
           mb: '1rem',
-          color: '#7C8493'
+          color: '#7C8493',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap',
+          width: '100%',
+          overflow: 'hidden'
         }}>
-          Revolut is looking for Email Marketing to help team ma ...
-        </Typography>
+          {item.description}
+        </Typography> */}
 
-        <Stack direction={'row'} spacing={1}>
-          <Chip
-            label='Marketing' sx={{
-              color: '#FFB836',
-              backgroundColor: '#FDF3EB',
-              fontFamily: epilogue.style,
-              fontSize: '14px',
-              fontWeight: 600,
-              lineHeight: '160%'
-            }} />
-          <Chip
-            label='Design' sx={{
-              color: '#56CDAD',
-              backgroundColor: '#EFFAF7',
-              fontFamily: epilogue.style,
-              fontSize: '14px',
-              fontWeight: 600,
-              lineHeight: '160%'
-            }} />
+        <Stack
+          direction={'row'}
+          spacing={1}
+          useFlexGap
+          flexWrap={'wrap'}
+        >
+          {item.skills.map((skill, index) => {
+            if (index < 2) {
+              return (
+                <Chip
+                  key={skill} label={skill} sx={{
+                    color: '#FFB836',
+                    backgroundColor: '#FDF3EB',
+                    fontFamily: epilogue.style,
+                    fontSize: '14px',
+                    fontWeight: 600,
+                    lineHeight: '160%'
+                  }} />
+              )
+            }
+          })}
         </Stack>
       </Box>
     </Link>
   )
 }
 
-export default BoxJobFeatured
+export default BoxJobFeatured;

@@ -4,7 +4,13 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import DesignServicesIcon from '@mui/icons-material/DesignServices';
 import { clashDisplay } from "@/lib/font";
 
-const BoxCategory = () => {
+interface IProps {
+  item: ISkill;
+}
+
+const BoxCategory = (props: IProps) => {
+  const { item } = props;
+
   return (
     <Box sx={{
       p: { xs: '16px', md: '32px' },
@@ -40,7 +46,7 @@ const BoxCategory = () => {
             lineHeight: '120%',
             mb: { xs: '0', sm: '12px' }
           }}>
-          Design
+          {item.name}
         </Typography>
 
         <Box

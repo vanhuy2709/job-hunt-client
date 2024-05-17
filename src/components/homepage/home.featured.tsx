@@ -7,8 +7,12 @@ import ButtonLink from "../button/button.link";
 import BoxJobFeatured from "../box/box.job.featured";
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-const HomeFeatured = () => {
+interface IProps {
+  data: IJob[] | undefined;
+}
+const HomeFeatured = (props: IProps) => {
   const matches = useMediaQuery('(min-width:600px)');
+  const { data } = props;
 
   return (
     <Box my={'72px'}>
@@ -27,30 +31,11 @@ const HomeFeatured = () => {
 
         {/* List jobs featured */}
         <Grid container spacing={2} mb={{ xs: '24px', md: '0' }}>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <BoxJobFeatured />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <BoxJobFeatured />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <BoxJobFeatured />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <BoxJobFeatured />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <BoxJobFeatured />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <BoxJobFeatured />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <BoxJobFeatured />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <BoxJobFeatured />
-          </Grid>
+          {data && data.length > 0 && data.map(item => (
+            <Grid item xs={12} sm={6} md={4} lg={3} key={item._id}>
+              <BoxJobFeatured item={item} />
+            </Grid>
+          ))}
         </Grid>
 
         {matches ? (<></>) : (<ButtonLink>Show all jobs</ButtonLink>)}
