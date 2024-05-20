@@ -23,7 +23,7 @@ const CompanyDetailDesc = (props: IProps) => {
         <Stack direction={'column'} spacing={3} flex={1.7}>
           <Box>
             <AppHeadline text="Company Profile" />
-            <Typography sx={{
+            <Box sx={{
               fontFamily: epilogue.style,
               color: '#515B6F',
               lineHeight: '160%',
@@ -31,7 +31,7 @@ const CompanyDetailDesc = (props: IProps) => {
             }}>
               <div dangerouslySetInnerHTML={{ __html: description ? description : '' }}>
               </div>
-            </Typography>
+            </Box>
           </Box>
 
           <Box>

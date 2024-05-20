@@ -5,6 +5,7 @@ import Chip from "@mui/material/Chip";
 import Avatar from "@mui/material/Avatar";
 import { epilogue } from "@/lib/font";
 import Link from "next/link";
+import { convertSlugUrl } from "@/utils/api";
 
 const bull = (
   <Box
@@ -24,7 +25,7 @@ const BoxJobFeatured = (props: IProps) => {
   const { item } = props;
 
   return (
-    <Link href={`/find-job/${item._id}`} style={{ textDecoration: 'none' }}>
+    <Link href={`/find-job/${convertSlugUrl(item.name)}-${item._id}.html`} style={{ textDecoration: 'none' }}>
       <Box sx={{
         p: '24px',
         border: 1,

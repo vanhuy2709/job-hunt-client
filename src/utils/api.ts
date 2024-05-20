@@ -87,13 +87,13 @@ export const sendRequest = async <T>(props: IRequest) => {
 //   return "/user/default-user.png"
 // }
 
-// export const convertSlugUrl = (str: string) => {
-//   if (!str) return '';
+export const convertSlugUrl = (str: string) => {
+  if (!str) return '';
 
-//   str = slugify(str, {
-//     lower: true,
-//     locale: 'vi'
-//   })
+  str = slugify(str, {
+    lower: true,
+    locale: 'vi'
+  })
 
-//   return str;
-// }
+  return str;
+}

@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { clashDisplay, epilogue } from "@/lib/font";
 import Link from "next/link";
+import { convertSlugUrl } from "@/utils/api";
 
 interface IProps {
   data: ICompany;
@@ -11,7 +12,7 @@ const BoxCompany = (props: IProps) => {
   const { data } = props;
 
   return (
-    <Link href={`/browse-companies/${data._id}`} style={{ textDecoration: 'unset' }}>
+    <Link href={`/browse-companies/${convertSlugUrl(data.name)}-${data._id}.html`} style={{ textDecoration: 'unset' }}>
       <Box
         sx={{
           border: '1px solid #D6DDEB',

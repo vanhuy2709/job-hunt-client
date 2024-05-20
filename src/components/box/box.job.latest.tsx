@@ -6,6 +6,7 @@ import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import { epilogue } from "@/lib/font";
 import Link from "next/link";
+import { convertSlugUrl } from "@/utils/api";
 
 const bull = (
   <Box
@@ -25,7 +26,7 @@ const BoxJobLatest = (props: IProps) => {
   const { item } = props;
 
   return (
-    <Link href={`/find-job/${item._id}`} style={{ textDecoration: 'none' }}>
+    <Link href={`/find-job/${convertSlugUrl(item.name)}-${item._id}.html`} style={{ textDecoration: 'none' }}>
       <Box
         py={{ xs: '16px', md: '24px' }}
         px={{ xs: '16px', md: '40px' }}
