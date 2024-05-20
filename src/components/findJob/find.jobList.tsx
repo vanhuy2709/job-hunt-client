@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import { epilogue } from "@/lib/font";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import FilterListIcon from '@mui/icons-material/FilterList';
+import Pagination from '@mui/material/Pagination';
 
 import FilterTypeEmployment from "../filter/filter.type.employment";
 import FilterCategory from "../filter/filter.category";
@@ -14,10 +15,66 @@ import FilterLevel from "../filter/filter.level";
 import FilterSalary from "../filter/filter.salary";
 import AppHeadline from "../content/app.headline";
 import BoxJob from "../box/box.job";
+import { sendRequest } from "@/utils/api";
+import { useState, useEffect } from "react";
 
 const FindJobList = () => {
-
   const matches = useMediaQuery('(min-width:900px)');
+  const [listJob, setListJob] = useState<IJob[]>();
+  const [meta, setMeta] = useState({
+    current: 1,
+    pageSize: 8,
+    pages: 0,
+    total: 0
+  })
+
+  // Get data list job
+  const getDataListJob = async () => {
+    const res = await sendRequest<IBackendRes<IModelPaginate<IJob>>>({
+      method: "GET",
+      url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/jobs`,
+      queryParams: {
+        current: meta.current,
+        pageSize: meta.pageSize,
+      }
+    })
+
+    if (res.data) {
+      setListJob(res.data.result);
+      setMeta({
+        current: res.data.meta.current,
+        pageSize: res.data.meta.pageSize,
+        pages: res.data.meta.pages,
+        total: res.data.meta.total
+      })
+    }
+  }
+
+  // Handle Change Pagination
+  const handleChangePagination = async (e: any, value: number) => {
+    const res = await sendRequest<IBackendRes<IModelPaginate<IJob>>>({
+      method: "GET",
+      url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/jobs`,
+      queryParams: {
+        current: value,
+        pageSize: meta.pageSize,
+      }
+    })
+
+    if (res.data) {
+      setListJob(res.data.result);
+      setMeta({
+        current: res.data.meta.current,
+        pageSize: res.data.meta.pageSize,
+        pages: res.data.meta.pages,
+        total: res.data.meta.total
+      })
+    }
+  }
+
+  useEffect(() => {
+    getDataListJob();
+  }, [])
 
   return (
     <Container maxWidth='xl'>
@@ -64,17 +121,18 @@ const FindJobList = () => {
             </Box>
 
             {/* List Jobs */}
-            <Box display={'flex'} gap={'16px'} flexDirection={'column'}>
-              <BoxJob />
-              <BoxJob />
-              <BoxJob />
-              <BoxJob />
-              <BoxJob />
-              <BoxJob />
-              <BoxJob />
-              <BoxJob />
-              <BoxJob />
+            <Box display={'flex'} gap={'16px'} flexDirection={'column'} mb={2}>
+              {listJob && listJob.length > 0 && listJob.map(job => (
+                <BoxJob key={job._id} job={job} />
+              ))}
             </Box>
+
+            <Pagination
+              sx={{ display: 'flex', justifyContent: 'center' }}
+              size="large"
+              count={meta.pages}
+              onChange={handleChangePagination}
+            />
           </Grid>
         </Grid>
       </Box>

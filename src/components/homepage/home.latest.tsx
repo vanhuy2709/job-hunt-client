@@ -8,7 +8,7 @@ import BoxJobLatest from "../box/box.job.latest";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 interface IProps {
-  data: IJob[] | undefined;
+  data?: IJob[] | undefined;
 }
 const HomeLatest = (props: IProps) => {
   const matches = useMediaQuery('(min-width:600px)');
@@ -25,7 +25,7 @@ const HomeLatest = (props: IProps) => {
           mb={'48px'}
         >
           <AppTitle subTitle="Latest" mainTitle="jobs open" />
-          {matches ? (<ButtonLink>Show all jobs</ButtonLink>) : (<></>)}
+          {matches ? (<ButtonLink path="/find-job">Show all jobs</ButtonLink>) : (<></>)}
         </Box>
 
         {/* List job latest */}
@@ -37,7 +37,7 @@ const HomeLatest = (props: IProps) => {
           ))}
         </Grid>
 
-        {matches ? (<></>) : (<ButtonLink>Show all jobs</ButtonLink>)}
+        {matches ? (<></>) : (<ButtonLink path="/find-job">Show all jobs</ButtonLink>)}
 
       </Container>
     </Box>

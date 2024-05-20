@@ -12,7 +12,13 @@ import Link from "next/link";
 import Image from "next/image";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-const CompanyDetailHeader = () => {
+interface IProps {
+  logo: string | undefined;
+  name: string | undefined;
+}
+const CompanyDetailHeader = (props: IProps) => {
+
+  const { logo, name } = props;
 
   const matches = useMediaQuery('(min-width:600px)');
 
@@ -25,16 +31,16 @@ const CompanyDetailHeader = () => {
         </Link>
         <Link
           style={{ textDecoration: 'none', color: 'inherit' }}
-          href="/material-ui/getting-started/installation/"
+          href="/browse-companies"
         >
-          Core
+          Browse Companies
         </Link>
-        <Typography color="text.primary">Breadcrumbs</Typography>
+        <Typography color="text.primary">{name}</Typography>
       </Breadcrumbs>
 
       <Stack direction={{ xs: 'column', md: 'row' }} spacing={4} alignItems={{ xs: 'unset', md: 'center' }}>
         <Image
-          src={'/logo/logo-website.svg'}
+          src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/images/company/${logo}`}
           alt="logo-company"
           width={matches ? 172 : 100}
           height={matches ? 172 : 100}
@@ -49,7 +55,7 @@ const CompanyDetailHeader = () => {
             lineHeight: '110%',
             mb: '12px'
           }}>
-            Stripe
+            {name}
           </Typography>
           <Link href={'https://stripe.com'} style={{ textDecoration: 'none' }}>
             <Typography sx={{

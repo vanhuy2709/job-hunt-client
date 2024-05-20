@@ -1,5 +1,5 @@
 import { epilogue } from "@/lib/font";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import Checkbox from "@mui/material/Checkbox";
@@ -11,7 +11,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 
-const listTypeOfElement = ['Entry Level', 'Mid Level', 'Senior Level', 'Director', 'VP or Above'];
+const listTypeOfElement = ['FRESHER', 'MIDDLE', 'SENIOR', 'JUNIOR'];
 
 const FilterLevel = () => {
   const [open, setOpen] = useState(true);

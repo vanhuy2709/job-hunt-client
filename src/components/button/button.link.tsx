@@ -4,15 +4,16 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { epilogue } from '@/lib/font'
 
 interface IProps {
-  children: React.ReactNode
+  children: React.ReactNode;
+  path: string;
 }
 const ButtonLink = (props: IProps) => {
 
-  const { children } = props;
+  const { children, path } = props;
 
   return (
     <Link
-      href={'/find-job'}
+      href={path ? path : '/'}
       style={{
         textDecoration: 'none',
         display: 'flex',

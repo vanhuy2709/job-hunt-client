@@ -20,8 +20,12 @@ const bull = (
     }}>•</Box>
 );
 
-const JobDetailHeader = () => {
+interface IProps {
+  job: IJob | undefined;
+}
+const JobDetailHeader = (props: IProps) => {
   const matches = useMediaQuery('(min-width:600px)');
+  const { job } = props;
 
   return (
     <Box>
@@ -32,11 +36,11 @@ const JobDetailHeader = () => {
         </Link>
         <Link
           style={{ textDecoration: 'none', color: 'inherit' }}
-          href="/material-ui/getting-started/installation/"
+          href="/find-job"
         >
-          Core
+          Job
         </Link>
-        <Typography color="text.primary">Breadcrumbs</Typography>
+        <Typography color="text.primary">{job?.name}</Typography>
       </Breadcrumbs>
 
       <Box
@@ -57,20 +61,20 @@ const JobDetailHeader = () => {
           gap: '24px'
         }}>
           <Image
-            src={'/logo/logo-website.svg'}
+            src={`http://localhost:8000/images/company/${job?.company.logo}`}
             alt="logo-company"
             width={matches ? 80 : 50}
             height={matches ? 80 : 50}
           />
           <Box>
-            <AppHeadline text="Social Media Assistant" />
+            <AppHeadline text={job?.name} />
             <Typography sx={{
               fontFamily: epilogue.style,
               lineHeight: '160%',
               color: '#515B6F',
               mb: 1
             }}>
-              Stripe{bull}Paris, France{bull}Full-Time
+              {job?.company.name}{bull}{job?.location}{bull}Full-Time
             </Typography>
           </Box>
         </Box>

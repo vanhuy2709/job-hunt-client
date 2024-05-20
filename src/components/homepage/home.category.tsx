@@ -26,7 +26,7 @@ const HomeCategory = (props: IProps) => {
           mb={'48px'}
         >
           <AppTitle subTitle="Explore by" mainTitle="category" />
-          {matches ? (<ButtonLink>Show all jobs</ButtonLink>) : (<></>)}
+          {matches ? (<ButtonLink path="/find-job">Show all jobs</ButtonLink>) : (<></>)}
         </Box>
 
         <Grid
@@ -41,7 +41,7 @@ const HomeCategory = (props: IProps) => {
           ))}
         </Grid>
 
-        {matches ? (<></>) : (<ButtonLink>Show all jobs</ButtonLink>)}
+        {matches ? (<></>) : (<ButtonLink path="/find-job">Show all jobs</ButtonLink>)}
 
       </Container>
     </Box>

@@ -2,7 +2,7 @@ import { clashDisplay } from "@/lib/font";
 import Typography from "@mui/material/Typography"
 
 interface IProps {
-  text: string;
+  text: string | undefined;
 }
 
 const AppHeadline = (props: IProps) => {

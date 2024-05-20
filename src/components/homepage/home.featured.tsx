@@ -26,7 +26,7 @@ const HomeFeatured = (props: IProps) => {
           mb={'48px'}
         >
           <AppTitle subTitle="Featured" mainTitle="jobs" />
-          {matches ? (<ButtonLink>Show all jobs</ButtonLink>) : (<></>)}
+          {matches ? (<ButtonLink path="/find-job">Show all jobs</ButtonLink>) : (<></>)}
         </Box>
 
         {/* List jobs featured */}
@@ -38,7 +38,7 @@ const HomeFeatured = (props: IProps) => {
           ))}
         </Grid>
 
-        {matches ? (<></>) : (<ButtonLink>Show all jobs</ButtonLink>)}
+        {matches ? (<></>) : (<ButtonLink path="/find-job">Show all jobs</ButtonLink>)}
 
       </Container>
     </Box>

@@ -4,10 +4,14 @@ import Typography from "@mui/material/Typography";
 import { clashDisplay, epilogue } from "@/lib/font";
 import Link from "next/link";
 
-const BoxCompany = () => {
+interface IProps {
+  data: ICompany;
+}
+const BoxCompany = (props: IProps) => {
+  const { data } = props;
 
   return (
-    <Link href={'/browse-companies/123'} style={{ textDecoration: 'unset' }}>
+    <Link href={`/browse-companies/${data._id}`} style={{ textDecoration: 'unset' }}>
       <Box
         sx={{
           border: '1px solid #D6DDEB',
@@ -19,7 +23,7 @@ const BoxCompany = () => {
         }}
       >
         <Image
-          src={'/logo/logo-website.svg'}
+          src={`http://localhost:8000/images/company/${data.logo}`}
           alt='logo-website'
           width={88}
           height={88}
@@ -34,9 +38,9 @@ const BoxCompany = () => {
           lineHeight: '120%',
           mb: '1rem'
         }}>
-          Pentagram
+          {data.name}
         </Typography>
-        <Box sx={{
+        {/* <Box sx={{
           fontFamily: epilogue.style,
           lineHeight: '160%',
           padding: '4px 12px',
@@ -45,7 +49,7 @@ const BoxCompany = () => {
           textAlign: 'center'
         }}>
           3 Jobs
-        </Box>
+        </Box> */}
       </Box>
     </Link>
   )

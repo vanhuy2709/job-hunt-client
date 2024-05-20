@@ -24,8 +24,7 @@ const BoxJobFeatured = (props: IProps) => {
   const { item } = props;
 
   return (
-    <Link href={'/find-job/123'} style={{ textDecoration: 'none' }}>
-
+    <Link href={`/find-job/${item._id}`} style={{ textDecoration: 'none' }}>
       <Box sx={{
         p: '24px',
         border: 1,
@@ -39,7 +38,7 @@ const BoxJobFeatured = (props: IProps) => {
           alignItems={'center'}
           mb={'1rem'}
         >
-          <Avatar src={`http://localhost:8000/images/company/${item.company.logo}`} alt="logo-company" />
+          <Avatar src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/images/company/${item.company.logo}`} alt="logo-company" />
           <Typography sx={{
             fontFamily: epilogue.style,
             lineHeight: '160%',

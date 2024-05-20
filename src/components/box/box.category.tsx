@@ -54,7 +54,7 @@ const BoxCategory = (props: IProps) => {
           alignItems={'center'}
           gap={2}
         >
-          <Typography>235 jobs available</Typography>
+          <Typography>12 jobs available</Typography>
           <ArrowForwardIcon />
         </Box>
       </Box>

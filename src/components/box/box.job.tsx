@@ -19,10 +19,15 @@ const bull = (
     }}>•</Box>
 );
 
-const BoxJob = () => {
+interface IProps {
+  job: IJob;
+}
+const BoxJob = (props: IProps) => {
+
+  const { job } = props;
 
   return (
-    <Link href={'/find-job/123'} style={{ textDecoration: 'none' }}>
+    <Link href={`/find-job/${job._id}`} style={{ textDecoration: 'none' }}>
       <Box
         py={{ xs: '16px', md: '24px' }}
         px={{ xs: '16px', md: '40px' }}
@@ -37,7 +42,7 @@ const BoxJob = () => {
       >
         <Stack direction={{ xs: 'column', md: 'row' }} spacing={3}>
           <Avatar
-            src="/logo/logo-website.svg"
+            src={`http://localhost:8000/images/company/${job.company.logo}`}
             sx={{
               width: { xs: '48px', md: '64px' },
               height: { xs: '48px', md: '64px' }
@@ -52,7 +57,7 @@ const BoxJob = () => {
               mb: 1,
               color: '#25324B'
             }}>
-              Social Media Assistant
+              {job.name}
             </Typography>
             <Typography sx={{
               fontFamily: epilogue.style,
@@ -60,7 +65,7 @@ const BoxJob = () => {
               color: '#515B6F',
               mb: 1
             }}>
-              Nomad{bull}Paris, France
+              {job.company.name}{bull}{job.location}
             </Typography>
             <Stack direction={"row"} spacing={1} useFlexGap flexWrap={'wrap'}>
               <Chip label='Full-Time' sx={{
@@ -73,25 +78,19 @@ const BoxJob = () => {
               }} />
 
               <Divider orientation="vertical" flexItem />
-
-              <Chip label="Marketing" sx={{
-                color: '#FFB836',
-                backgroundColor: 'transparent',
-                fontFamily: epilogue.style,
-                fontSize: '14px',
-                fontWeight: 600,
-                lineHeight: '160%',
-                border: 1
-              }} />
-              <Chip label="Design " sx={{
-                color: '#4640DE',
-                backgroundColor: 'transparent',
-                fontFamily: epilogue.style,
-                fontSize: '14px',
-                fontWeight: 600,
-                lineHeight: '160%',
-                border: 1
-              }} />
+              {job.skills.map((skill, index) => {
+                return (
+                  <Chip key={skill} label={skill} sx={{
+                    color: index % 2 === 0 ? '#FFB836' : '#4640DE',
+                    backgroundColor: 'transparent',
+                    fontFamily: epilogue.style,
+                    fontSize: '14px',
+                    fontWeight: 600,
+                    lineHeight: '160%',
+                    border: 1
+                  }} />
+                )
+              })}
             </Stack>
           </Box>
         </Stack>
