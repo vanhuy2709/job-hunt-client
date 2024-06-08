@@ -27,7 +27,7 @@ const BoxJob = (props: IProps) => {
   const { job } = props;
 
   return (
-    <Link href={`/find-job/${job._id}`} style={{ textDecoration: 'none' }}>
+    <Link href={`/find-job/${job.name}-${job._id}.html`} style={{ textDecoration: 'none' }}>
       <Box
         py={{ xs: '16px', md: '24px' }}
         px={{ xs: '16px', md: '40px' }}
@@ -42,7 +42,7 @@ const BoxJob = (props: IProps) => {
       >
         <Stack direction={{ xs: 'column', md: 'row' }} spacing={3}>
           <Avatar
-            src={`http://localhost:8000/images/company/${job.company.logo}`}
+            src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/images/company/${job.company.logo}`}
             sx={{
               width: { xs: '48px', md: '64px' },
               height: { xs: '48px', md: '64px' }

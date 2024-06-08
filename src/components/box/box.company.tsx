@@ -24,7 +24,7 @@ const BoxCompany = (props: IProps) => {
         }}
       >
         <Image
-          src={`http://localhost:8000/images/company/${data.logo}`}
+          src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/images/company/${data.logo}`}
           alt='logo-website'
           width={88}
           height={88}

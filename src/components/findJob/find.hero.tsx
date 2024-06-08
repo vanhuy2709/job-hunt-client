@@ -14,7 +14,6 @@ import { epilogue } from "@/lib/font";
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 const FindJobHero = () => {
-
   const matches = useMediaQuery('(min-width:600px)');
 
   return (
