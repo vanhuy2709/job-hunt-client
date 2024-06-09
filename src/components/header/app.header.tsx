@@ -224,7 +224,7 @@ const AppHeader = () => {
                 </>
                 :
                 <>
-                  <Link href={'#'} style={{ textDecoration: 'unset', color: '#4640DE' }} onClick={() => signIn()}>
+                  <Link href={'/auth/signin'} style={{ textDecoration: 'unset', color: '#4640DE' }}>
                     <ButtonStyle outlined>
                       Login
                     </ButtonStyle>
