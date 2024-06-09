@@ -15,7 +15,7 @@ const BrowseRecommend = () => {
   const [listCompany, setListCompany] = useState<ICompany[]>();
   const [meta, setMeta] = useState({
     current: 1,
-    pageSize: 4,
+    pageSize: 10,
     pages: 0,
     total: 0
   })

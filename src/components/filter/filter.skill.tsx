@@ -11,9 +11,9 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import { epilogue } from "@/lib/font";
 
-const listTypeOfElement = ['Full-time', 'Part-time', 'Remote', 'Internship', 'Contract']
+const listTypeOfElement = ['Java', 'NodeJS', 'ReactJS', 'NextJS', 'NestJS']
 
-const FilterTypeEmployment = () => {
+const FilterSkill = () => {
 
   const [open, setOpen] = useState(true);
 
@@ -31,7 +31,7 @@ const FilterTypeEmployment = () => {
             lineHeight: '150%',
             color: '#25324B',
           }}>
-            Type of Employment
+            Skill
           </Typography>
         </ListItemText>
         {open ?
@@ -58,4 +58,4 @@ const FilterTypeEmployment = () => {
   )
 }
 
-export default FilterTypeEmployment
+export default FilterSkill

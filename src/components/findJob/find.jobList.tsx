@@ -9,10 +9,9 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import Pagination from '@mui/material/Pagination';
 
-import FilterTypeEmployment from "../filter/filter.type.employment";
+import FilterSkill from "../filter/filter.skill";
 import FilterCategory from "../filter/filter.category";
 import FilterLevel from "../filter/filter.level";
-import FilterSalary from "../filter/filter.salary";
 import AppHeadline from "../content/app.headline";
 import BoxJob from "../box/box.job";
 import { sendRequest } from "@/utils/api";
@@ -86,10 +85,10 @@ const FindJobList = () => {
             (<Grid item md={2}
               sx={{ display: 'flex', flexDirection: 'column', gap: '40px' }}
             >
-              <FilterTypeEmployment />
-              <FilterCategory />
+              <FilterSkill />
               <FilterLevel />
-              <FilterSalary />
+              {/* <FilterCategory /> */}
+              {/* <FilterSalary /> */}
             </Grid>)
             :
             (<Grid item xs={12}>

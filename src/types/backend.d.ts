@@ -3,6 +3,14 @@ export { };
 
 declare global {
 
+  interface IPermission {
+    _id: string;
+    name: string;
+    apiPath: string;
+    method: string;
+    module: string;
+  }
+
   interface ISkill {
     _id: string,
     name: string,

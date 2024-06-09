@@ -8,13 +8,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <StoreProvider>
-          <ThemeRegistry>
+        <ThemeRegistry>
+          <StoreProvider>
             <NextAuthWrapper>
               {children}
             </NextAuthWrapper>
-          </ThemeRegistry>
-        </StoreProvider>
+          </StoreProvider>
+        </ThemeRegistry>
       </body>
     </html>
   );

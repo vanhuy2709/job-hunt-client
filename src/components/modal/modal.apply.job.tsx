@@ -7,6 +7,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Image from 'next/image';
 import { clashDisplay, epilogue } from '@/lib/font';
+import { ButtonStyle } from '@/styles/ButtonStyle';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -120,7 +121,15 @@ const ModalApplyJob = (props: IProps) => {
             fontWeight: 600,
             lineHeight: '160%'
           }}>Attach your resume</Typography>
+
+          <button>Upload</button>
         </Stack>
+
+        <Divider />
+
+        <ButtonStyle>
+          Submit Application
+        </ButtonStyle>
       </Stack>
     </Modal>
   )

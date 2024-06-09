@@ -22,7 +22,6 @@ export const authOptions: AuthOptions = {
       },
       async authorize(credentials, req) {
         // Add logic here to look up the user from the credentials supplied
-        const user = { id: "1", name: "J Smith", email: "jsmith@example.com" }
         const res = await sendRequest<IBackendRes<JWT>>({
           url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/auth/login`,
           method: 'POST',
@@ -32,7 +31,7 @@ export const authOptions: AuthOptions = {
           }
         })
 
-        if (res.data) {
+        if (res && res.data) {
           // Any object returned will be saved in `user` property of the JWT
           return res.data as any;
         } else {
@@ -50,10 +49,43 @@ export const authOptions: AuthOptions = {
   ],
   callbacks: {
     jwt: async ({ token, user, account, profile, trigger }) => {
-      if (trigger === 'signIn' && account?.provider === 'credentials') {
 
+      // Login with social media
+      if (trigger === 'signIn' && account?.provider !== 'credentials') {
+
+        // Call API login social media (Github)
+        const res = await sendRequest<JWT>({
+          url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/auth/login-social`,
+          method: 'POST',
+          body: {
+            type: account?.provider.toLocaleUpperCase(),
+            name: user.name,
+            email: user.email,
+          }
+        })
+
+        if (res) {
+          token.access_token = res.access_token;
+          token.user = res.user;
+        }
+      }
+
+      // Login with Credentials
+      if (trigger === 'signIn' && account?.provider === 'credentials') {
+        // local data
+        // @ts-ignore
+        token.access_token = user.access_token;
+        // @ts-ignore
+        token.user = user.user;
       }
       return token;
+    },
+    session: ({ session, token, user }) => {
+      if (token) {
+        session.access_token = token.access_token;
+        session.user = token.user;
+      }
+      return session;
     }
   }
 }

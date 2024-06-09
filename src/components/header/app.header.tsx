@@ -7,10 +7,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useSession, signIn, signOut } from "next-auth/react";
 
-// Imports the Meet library
-
-
-
 // Import MUI Lib
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -34,6 +30,9 @@ const pages = [
 const AppHeader = () => {
 
   const { data: session } = useSession()
+
+  console.log('>>> check session: ', session);
+
   const router = useRouter();
   const pathname = usePathname();
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -225,7 +224,7 @@ const AppHeader = () => {
                 </>
                 :
                 <>
-                  <Link href={'/api/auth/signin'} style={{ textDecoration: 'unset', color: '#4640DE' }}>
+                  <Link href={'#'} style={{ textDecoration: 'unset', color: '#4640DE' }} onClick={() => signIn()}>
                     <ButtonStyle outlined>
                       Login
                     </ButtonStyle>
