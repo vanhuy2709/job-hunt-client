@@ -1,4 +1,5 @@
 import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import DesignServicesIcon from '@mui/icons-material/DesignServices';
@@ -38,7 +39,7 @@ const BoxCategory = (props: IProps) => {
           color: '#4640DE'
         }} />
 
-      <Box>
+      <Stack direction={'row'} justifyContent={'space-between'}>
         <Typography
           sx={{
             fontFamily: clashDisplay.style,
@@ -49,15 +50,8 @@ const BoxCategory = (props: IProps) => {
           {item.name}
         </Typography>
 
-        <Box
-          display={'flex'}
-          alignItems={'center'}
-          gap={2}
-        >
-          <Typography>12 jobs available</Typography>
-          <ArrowForwardIcon />
-        </Box>
-      </Box>
+        <ArrowForwardIcon />
+      </Stack>
     </Box>
   )
 }

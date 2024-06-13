@@ -1,5 +1,5 @@
 import { epilogue } from "@/lib/font";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import Checkbox from "@mui/material/Checkbox";
@@ -10,15 +10,31 @@ import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
+import { sendRequest } from "@/utils/api";
 
-const listTypeOfElement = ['Design', 'Sales', 'Marketing', 'Business', 'Human Resource', 'Finance', 'Engineering', 'Technology'];
-
-const FilterCategory = () => {
+const FilterWorkType = () => {
   const [open, setOpen] = useState(true);
+  const [listWorkType, setListWorkType] = useState<Array<IWorkType>>([]);
 
   const handleClick = () => {
     setOpen(!open);
   };
+
+  // Get data work type
+  const getDataWorkType = async () => {
+    const res = await sendRequest<IBackendRes<IWorkType[]>>({
+      method: 'GET',
+      url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/worktypes/list`
+    })
+
+    if (res?.data) {
+      setListWorkType(res.data);
+    }
+  }
+
+  useEffect(() => {
+    getDataWorkType();
+  }, [])
 
   return (
     <List sx={{ width: '100%' }} disablePadding>
@@ -30,7 +46,7 @@ const FilterCategory = () => {
             lineHeight: '150%',
             color: '#25324B',
           }}>
-            Categories
+            Working Type
           </Typography>
         </ListItemText>
         {open ?
@@ -40,15 +56,15 @@ const FilterCategory = () => {
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <FormGroup>
-          {listTypeOfElement.map(item => (
+          {listWorkType.map(workType => (
             <FormControlLabel
-              key={item}
+              key={workType._id}
               control={<Checkbox sx={{
                 "&.Mui-checked": {
                   color: '#4640DE'
                 }
               }} />}
-              label={item}
+              label={workType.name}
             />
           ))}
         </FormGroup>
@@ -57,4 +73,4 @@ const FilterCategory = () => {
   )
 }
 
-export default FilterCategory
+export default FilterWorkType;

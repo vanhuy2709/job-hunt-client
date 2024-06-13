@@ -141,32 +141,34 @@ const AuthSignIn = () => {
                 :
                 <>
                   {/* Logo */}
-                  <Stack direction={'row'} useFlexGap gap={'8px'} mt={'27px'} justifyContent={'center'}>
-                    <Image
-                      src={'/logo/logo-website.svg'}
-                      alt='logo-website'
-                      width={32}
-                      height={32}
-                    />
-                    <Typography
-                      variant="h6"
-                      noWrap
-                      sx={{
-                        mr: 2,
-                        display: { md: 'flex' },
-                        fontFamily: redHatDisplay.style,
-                        fontSize: '24px',
-                        lineHeight: '36px',
-                        fontWeight: 700,
-                        color: '#25324B',
-                        textDecoration: 'none',
-                        letterSpacing: '-0.24px',
-                        cursor: 'pointer'
-                      }}
-                    >
-                      JobHuntly
-                    </Typography>
-                  </Stack>
+                  <Link href={'/'} style={{ textDecoration: 'none' }}>
+                    <Stack direction={'row'} useFlexGap gap={'8px'} mt={'27px'} justifyContent={'center'}>
+                      <Image
+                        src={'/logo/logo-website.svg'}
+                        alt='logo-website'
+                        width={32}
+                        height={32}
+                      />
+                      <Typography
+                        variant="h6"
+                        noWrap
+                        sx={{
+                          mr: 2,
+                          display: { md: 'flex' },
+                          fontFamily: redHatDisplay.style,
+                          fontSize: '24px',
+                          lineHeight: '36px',
+                          fontWeight: 700,
+                          color: '#25324B',
+                          textDecoration: 'none',
+                          letterSpacing: '-0.24px',
+                          cursor: 'pointer'
+                        }}
+                      >
+                        JobHuntly
+                      </Typography>
+                    </Stack>
+                  </Link>
                 </>
             }
 

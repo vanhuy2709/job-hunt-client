@@ -3,18 +3,25 @@ import Container from "@mui/material/Container"
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import Divider from "@mui/material/Divider";
 import SearchIcon from "@mui/icons-material/Search";
-import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 import AppTextHeading from "../content/app.text.heading";
 import AppSubtitle from "../content/app.subtitle";
-import ButtonStyle from "../button/button.style";
 import { epilogue } from "@/lib/font";
-import useMediaQuery from '@mui/material/useMediaQuery';
+import { useSearchParams } from "next/navigation";
+import { ButtonStyle } from "@/styles/ButtonStyle";
+import { useEffect, useState } from "react";
 
 const FindJobHero = () => {
-  const matches = useMediaQuery('(min-width:600px)');
+  // const matches = useMediaQuery('(min-width:600px)');
+  const searchParams = useSearchParams();
+  const [skill, setSkill] = useState<string | null>('');
+
+  useEffect(() => {
+    const skill = searchParams.get('skill');
+
+    setSkill(searchParams.get('skill') === null ? '' : skill);
+  }, [])
 
   return (
     <Box bgcolor={'#F8F8FD'} py={'65px'}>
@@ -41,20 +48,18 @@ const FindJobHero = () => {
             }}
           >
             <SearchIcon sx={{ mx: { xs: 1, sm: 2 }, my: 0.5 }} />
-            <TextField label="Job title or keyword" variant="standard" fullWidth />
+            <TextField
+              label="Enter keyword skills"
+              variant="standard"
+              fullWidth
+              value={skill}
+              onChange={(e) => setSkill(e.target.value)}
+            />
           </Box>
 
-          {matches ?
-            (<Divider orientation="vertical" variant="middle" flexItem />)
-            :
-            (<></>)}
-
-          <Box sx={{ display: 'flex', alignItems: 'flex-end', flex: 1 }}>
-            <LocationOnIcon sx={{ mx: { xs: 1, sm: 2 }, my: 0.5 }} />
-            <TextField label="Location" variant="standard" fullWidth />
-          </Box>
-
-          <ButtonStyle>Search</ButtonStyle>
+          <ButtonStyle onClick={() => console.log('Hello world')}>
+            Search
+          </ButtonStyle>
         </Box>
 
         <Typography sx={{

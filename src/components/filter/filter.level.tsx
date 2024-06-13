@@ -1,5 +1,6 @@
+'use client';
 import { epilogue } from "@/lib/font";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import Checkbox from "@mui/material/Checkbox";
@@ -10,15 +11,31 @@ import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
-
-const listTypeOfElement = ['FRESHER', 'MIDDLE', 'SENIOR', 'JUNIOR'];
+import { sendRequest } from "@/utils/api";
 
 const FilterLevel = () => {
   const [open, setOpen] = useState(true);
+  const [listLevel, setListLevel] = useState<Array<ILevel>>([]);
 
   const handleClick = () => {
     setOpen(!open);
   };
+
+  // Get data level
+  const getDataLevel = async () => {
+    const res = await sendRequest<IBackendRes<ILevel[]>>({
+      method: 'GET',
+      url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/levels/list`
+    })
+
+    if (res && res.data) {
+      setListLevel(res.data);
+    }
+  }
+
+  useEffect(() => {
+    getDataLevel();
+  }, [])
 
   return (
     <List sx={{ width: '100%' }} disablePadding>
@@ -40,15 +57,15 @@ const FilterLevel = () => {
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <FormGroup>
-          {listTypeOfElement.map(item => (
+          {listLevel.map(level => (
             <FormControlLabel
-              key={item}
+              key={level._id}
               control={<Checkbox sx={{
                 "&.Mui-checked": {
                   color: '#4640DE'
                 }
               }} />}
-              label={item}
+              label={level.name}
             />
           ))}
         </FormGroup>

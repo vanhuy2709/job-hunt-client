@@ -1,6 +1,6 @@
 import HomeHero from "@/components/homepage/home.hero";
 import HomeAdvertise from "@/components/homepage/home.advertise";
-import HomeCategory from "@/components/homepage/home.category";
+import HomeSkill from "@/components/homepage/home.skill";
 import HomeFeatured from "@/components/homepage/home.featured";
 import HomeLatest from "@/components/homepage/home.latest";
 import { sendRequest } from "@/utils/api";
@@ -16,7 +16,11 @@ const HomePage = async () => {
   // Get Data Skills
   const skills = await sendRequest<IBackendRes<IModelPaginate<ISkill>>>({
     url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/skills`,
-    method: 'GET'
+    method: 'GET',
+    queryParams: {
+      current: 1,
+      pageSize: 8
+    }
   })
 
   // Get Data Jobs
@@ -40,11 +44,17 @@ const HomePage = async () => {
     }
   })
 
+  // Get Data Location
+  const location = await sendRequest<IBackendRes<ILocation[]>>({
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/locations/list`,
+    method: 'GET',
+  })
+
   return (
     <>
-      <HomeHero />
+      <HomeHero data={location?.data} />
       <HomeAdvertise />
-      <HomeCategory data={skills.data?.result} />
+      <HomeSkill data={skills.data?.result} />
       <HomeFeatured data={jobs.data?.result} />
       <HomeLatest data={jobsLatest.data?.result} />
     </>

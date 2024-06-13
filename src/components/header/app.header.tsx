@@ -31,8 +31,6 @@ const AppHeader = () => {
 
   const { data: session } = useSession()
 
-  console.log('>>> check session: ', session);
-
   const router = useRouter();
   const pathname = usePathname();
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -134,8 +132,12 @@ const AppHeader = () => {
                 </MenuItem>
               ))}
               <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
-                <ButtonStyle outlined>Login</ButtonStyle>
-                <ButtonStyle>Sign up</ButtonStyle>
+                <Link href={'/auth/signin'} style={{ textDecoration: 'unset', color: '#4640DE' }}>
+                  <ButtonStyle outlined>Login</ButtonStyle>
+                </Link>
+                <Link href={'/auth/register'} style={{ textDecoration: 'unset', color: '#4640DE' }}>
+                  <ButtonStyle>Sign up</ButtonStyle>
+                </Link>
               </Box>
             </Menu>
           </Box>
@@ -204,7 +206,7 @@ const AppHeader = () => {
                 <>
                   <Button onClick={handleOpenUserMenu}>
                     {/* @ts-ignore */}
-                    <Avatar src={session?.user?.image} alt="Remy Sharp" />
+                    <Avatar>{session?.user?.name.charAt(0)}</Avatar>
                   </Button>
                   <Menu
                     anchorEl={anchorElUser}
@@ -235,17 +237,11 @@ const AppHeader = () => {
                     flexItem
                     sx={{ mx: '1rem' }}
                   />
-                  <ButtonStyle>Sign up</ButtonStyle>
+                  <Link href={'/auth/register'} style={{ textDecoration: 'unset', color: '#4640DE' }}>
+                    <ButtonStyle>Sign up</ButtonStyle>
+                  </Link>
                 </>
             }
-            {/* <ButtonStyle outlined>Login</ButtonStyle>
-            <Divider
-              orientation='vertical'
-              variant="middle"
-              flexItem
-              sx={{ mx: '1rem' }}
-            />
-            <ButtonStyle>Sign up</ButtonStyle> */}
           </Box>
 
 

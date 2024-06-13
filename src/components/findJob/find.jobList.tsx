@@ -9,16 +9,18 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import Pagination from '@mui/material/Pagination';
 
-import FilterSkill from "../filter/filter.skill";
-import FilterCategory from "../filter/filter.category";
+import FilterLocation from "../filter/filter.location";
+import FilterWorkType from "../filter/filter.work.type";
 import FilterLevel from "../filter/filter.level";
 import AppHeadline from "../content/app.headline";
 import BoxJob from "../box/box.job";
 import { sendRequest } from "@/utils/api";
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 
 const FindJobList = () => {
   const matches = useMediaQuery('(min-width:900px)');
+  const searchParams = useSearchParams();
   const [listJob, setListJob] = useState<IJob[]>();
   const [meta, setMeta] = useState({
     current: 1,
@@ -26,6 +28,10 @@ const FindJobList = () => {
     pages: 0,
     total: 0
   })
+
+  const skills = searchParams.get('skill');
+  const location = searchParams.get('location');
+  // console.log('check params: ', { skills, location });
 
   // Get data list job
   const getDataListJob = async () => {
@@ -35,7 +41,7 @@ const FindJobList = () => {
       queryParams: {
         current: meta.current,
         pageSize: meta.pageSize,
-      }
+      },
     })
 
     if (res.data) {
@@ -85,9 +91,9 @@ const FindJobList = () => {
             (<Grid item md={2}
               sx={{ display: 'flex', flexDirection: 'column', gap: '40px' }}
             >
-              <FilterSkill />
+              <FilterLocation />
               <FilterLevel />
-              {/* <FilterCategory /> */}
+              <FilterWorkType />
               {/* <FilterSalary /> */}
             </Grid>)
             :
@@ -110,7 +116,7 @@ const FindJobList = () => {
                   lineHeight: '160%',
                   color: '#7C8493'
                 }}>
-                  Showing 73 results
+                  Showing {meta.total} results
                 </Typography>
               </Box>
 

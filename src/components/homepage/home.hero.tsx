@@ -1,16 +1,45 @@
-import Box from "@mui/material/Box"
+'use client';
+import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Container from "@mui/material/Container";
 import SearchIcon from '@mui/icons-material/Search';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-
-import { clashDisplay, epilogue } from "@/lib/font";
-
 import Image from "next/image";
-import ButtonStyle from "../button/button.style";
+import { clashDisplay, epilogue } from "@/lib/font";
+import { ButtonStyle } from "@/styles/ButtonStyle";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
-const HomeHero = () => {
+interface IProp {
+  data: ILocation[] | undefined;
+}
+
+const HomeHero = (props: IProp) => {
+  const router = useRouter();
+  const { data: listLocation } = props;
+
+  const [skill, setSkill] = useState<string>("");
+  const [location, setLocation] = useState<string>("");
+
+  // Search skill
+  const handleSearchSkill = () => {
+    const objSearch = {} as any;
+
+    // If user search skill
+    if (skill.trim() !== '') {
+      objSearch.skill = skill.trim();
+    }
+    // If user search location
+    if (location !== '') {
+      objSearch.location = location;
+    }
+
+    const urlParams = new URLSearchParams(objSearch);
+    router.push(`/find-job?${urlParams.toString()}`);
+  }
+
   return (
     <Box pt={'82px'} pb={'103px'} bgcolor={'#F8F8FD'}>
       <Container maxWidth={'xl'}>
@@ -67,7 +96,11 @@ const HomeHero = () => {
           {/* Input Job */}
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <SearchIcon sx={{ mx: { xs: 1, sm: 2 } }} />
-            <TextField label="Job title or keyword" variant="standard"
+            <TextField
+              label="Job skills or keyword"
+              variant="standard"
+              value={skill}
+              onChange={(e) => setSkill(e.target.value)}
               sx={{
                 width: '100%'
               }} />
@@ -76,14 +109,30 @@ const HomeHero = () => {
           {/* Input Location */}
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <LocationOnIcon sx={{ mx: { xs: 1, sm: 2 } }} />
-            <TextField label="Location" variant="standard"
-              sx={{
-                width: '100%'
-              }} />
+            <FormControl sx={{ width: { xs: '100%', md: '200px' } }} variant="standard">
+              <InputLabel>Location</InputLabel>
+              <Select
+                label="Location"
+                defaultValue={""}
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+              >
+                {listLocation && listLocation.length > 0 && listLocation.map(location => (
+                  <MenuItem
+                    key={location._id}
+                    value={location.name}
+                  >
+                    {location.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </Box>
 
           {/* Submit Search */}
-          <ButtonStyle>Search my job</ButtonStyle>
+          <ButtonStyle onClick={() => handleSearchSkill()}>
+            Search my job
+          </ButtonStyle>
         </Box>
 
         <Typography sx={{

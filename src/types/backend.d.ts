@@ -3,6 +3,45 @@ export { };
 
 declare global {
 
+  interface ILocation {
+    _id: string;
+    name: string;
+    createdBy: {
+      _id: string;
+      email: string;
+    },
+    deletedAt: Date,
+    isDeleted: boolean,
+    createdAt: Date;
+    updatedAt: Date;
+  }
+
+  interface IWorkType {
+    _id: string;
+    name: string;
+    createdBy: {
+      _id: string;
+      email: string;
+    },
+    deletedAt: Date;
+    isDeleted: boolean;
+    createdAt: Date;
+    updatedAt: Date;
+  }
+
+  interface ILevel {
+    _id: string;
+    name: string;
+    createdBy: {
+      _id: string;
+      email: string;
+    },
+    deletedAt: Date,
+    isDeleted: boolean,
+    createdAt: Date,
+    updatedAt: Date,
+  }
+
   interface IPermission {
     _id: string;
     name: string;

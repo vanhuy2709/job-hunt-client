@@ -11,7 +11,7 @@ interface IProps {
   data: ISkill[] | undefined;
 }
 
-const HomeCategory = (props: IProps) => {
+const HomeSkill = (props: IProps) => {
   const matches = useMediaQuery('(min-width:600px)');
   const { data } = props;
 
@@ -25,7 +25,7 @@ const HomeCategory = (props: IProps) => {
           alignItems={'flex-end'}
           mb={'48px'}
         >
-          <AppTitle subTitle="Explore by" mainTitle="category" />
+          <AppTitle subTitle="Explore by" mainTitle="skill" />
           {matches ? (<ButtonLink path="/find-job">Show all jobs</ButtonLink>) : (<></>)}
         </Box>
 
@@ -48,4 +48,4 @@ const HomeCategory = (props: IProps) => {
   )
 }
 
-export default HomeCategory
+export default HomeSkill
