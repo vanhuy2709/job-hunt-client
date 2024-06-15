@@ -9,7 +9,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import Pagination from '@mui/material/Pagination';
 
-import FilterLocation from "../filter/filter.location";
+// import FilterLocation from "../filter/filter.location";
 import FilterWorkType from "../filter/filter.work.type";
 import FilterLevel from "../filter/filter.level";
 import AppHeadline from "../content/app.headline";
@@ -41,6 +41,7 @@ const FindJobList = () => {
       queryParams: {
         current: meta.current,
         pageSize: meta.pageSize,
+        sort: '-updatedAt'
       },
     })
 
@@ -63,6 +64,7 @@ const FindJobList = () => {
       queryParams: {
         current: value,
         pageSize: meta.pageSize,
+        sort: '-updatedAt'
       }
     })
 
@@ -91,7 +93,7 @@ const FindJobList = () => {
             (<Grid item md={2}
               sx={{ display: 'flex', flexDirection: 'column', gap: '40px' }}
             >
-              <FilterLocation />
+              {/* <FilterLocation /> */}
               <FilterLevel />
               <FilterWorkType />
               {/* <FilterSalary /> */}

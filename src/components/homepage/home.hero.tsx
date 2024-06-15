@@ -103,7 +103,13 @@ const HomeHero = (props: IProp) => {
               onChange={(e) => setSkill(e.target.value)}
               sx={{
                 width: '100%'
-              }} />
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleSearchSkill();
+                }
+              }}
+            />
           </Box>
 
           {/* Input Location */}
