@@ -10,31 +10,35 @@ import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
-import { sendRequest } from "@/utils/api";
 
-const FilterWorkType = () => {
+interface IProps {
+  listWorkType: IWorkType[] | undefined;
+  checkedWorkType: string[];
+  setCheckedWorkType: (v: string[]) => void;
+}
+
+const FilterWorkType = (props: IProps) => {
+  const { listWorkType, checkedWorkType, setCheckedWorkType } = props;
   const [open, setOpen] = useState(true);
-  const [listWorkType, setListWorkType] = useState<Array<IWorkType>>([]);
 
   const handleClick = () => {
     setOpen(!open);
   };
 
-  // Get data work type
-  const getDataWorkType = async () => {
-    const res = await sendRequest<IBackendRes<IWorkType[]>>({
-      method: 'GET',
-      url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/worktypes/list`
+  const handleChecked = (name: string) => {
+
+    // @ts-ignore
+    setCheckedWorkType(prev => {
+      const isChecked = checkedWorkType.includes(name);
+
+      if (isChecked) {
+        // Uncheck
+        return checkedWorkType.filter(item => item !== name);
+      } else {
+        return [...prev, name]
+      }
     })
-
-    if (res?.data) {
-      setListWorkType(res.data);
-    }
   }
-
-  useEffect(() => {
-    getDataWorkType();
-  }, [])
 
   return (
     <List sx={{ width: '100%' }} disablePadding>
@@ -56,17 +60,20 @@ const FilterWorkType = () => {
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <FormGroup>
-          {listWorkType.map(workType => (
-            <FormControlLabel
-              key={workType._id}
-              control={<Checkbox sx={{
-                "&.Mui-checked": {
-                  color: '#4640DE'
-                }
-              }} />}
-              label={workType.name}
-            />
-          ))}
+          {listWorkType && listWorkType.length > 0 &&
+            listWorkType.map(workType => (
+              <FormControlLabel
+                key={workType._id}
+                control={<Checkbox sx={{
+                  "&.Mui-checked": {
+                    color: '#4640DE'
+                  }
+                }} />}
+                label={workType.name}
+                checked={checkedWorkType.includes(workType.name)}
+                onChange={() => handleChecked(workType.name)}
+              />
+            ))}
         </FormGroup>
       </Collapse>
     </List>

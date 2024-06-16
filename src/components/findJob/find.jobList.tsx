@@ -4,23 +4,31 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import { epilogue } from "@/lib/font";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import Pagination from '@mui/material/Pagination';
-
-// import FilterLocation from "../filter/filter.location";
+import ViewListIcon from '@mui/icons-material/ViewList';
+import ToggleButton from '@mui/material/ToggleButton';
+import Stack from "@mui/material/Stack";
 import FilterWorkType from "../filter/filter.work.type";
 import FilterLevel from "../filter/filter.level";
 import AppHeadline from "../content/app.headline";
 import BoxJob from "../box/box.job";
+import { epilogue } from "@/lib/font";
 import { sendRequest } from "@/utils/api";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 
-const FindJobList = () => {
+interface IProps {
+  listLevel: ILevel[] | undefined;
+  listWorkType: IWorkType[] | undefined;
+}
+
+const FindJobList = (props: IProps) => {
+  const { listLevel, listWorkType } = props;
   const matches = useMediaQuery('(min-width:900px)');
   const searchParams = useSearchParams();
+  const [selected, setSelected] = useState(true);
   const [listJob, setListJob] = useState<IJob[]>();
   const [meta, setMeta] = useState({
     current: 1,
@@ -29,9 +37,14 @@ const FindJobList = () => {
     total: 0
   })
 
+  // Filter Level
+  const [checkedLevel, setCheckedLevel] = useState<Array<string>>([]);
+  // Filter Work Type
+  const [checkedWorkType, setCheckedWorkType] = useState<Array<string>>([]);
+  // Filter Skill
   const skills = searchParams.get('skill');
+  // Filter Location
   const location = searchParams.get('location');
-  // console.log('check params: ', { skills, location });
 
   // Get data list job
   const getDataListJob = async () => {
@@ -41,7 +54,11 @@ const FindJobList = () => {
       queryParams: {
         current: meta.current,
         pageSize: meta.pageSize,
-        sort: '-updatedAt'
+        skills: skills ? JSON.stringify([skills]) : '',
+        locations: location ? JSON.stringify([location]) : '',
+        workTypes: checkedWorkType.length > 0 ? JSON.stringify(checkedWorkType) : '',
+        levels: checkedLevel.length > 0 ? JSON.stringify(checkedLevel) : '',
+        sort: selected ? '-updatedAt' : 'updatedAt'
       },
     })
 
@@ -64,7 +81,11 @@ const FindJobList = () => {
       queryParams: {
         current: value,
         pageSize: meta.pageSize,
-        sort: '-updatedAt'
+        skills: skills ? JSON.stringify([skills]) : '',
+        locations: location ? JSON.stringify([location]) : '',
+        workTypes: checkedWorkType.length > 0 ? JSON.stringify(checkedWorkType) : '',
+        levels: checkedLevel.length > 0 ? JSON.stringify(checkedLevel) : '',
+        sort: selected ? '-updatedAt' : 'updatedAt'
       }
     })
 
@@ -81,7 +102,7 @@ const FindJobList = () => {
 
   useEffect(() => {
     getDataListJob();
-  }, [])
+  }, [searchParams, selected, checkedLevel, checkedWorkType])
 
   return (
     <Container maxWidth='xl'>
@@ -94,8 +115,16 @@ const FindJobList = () => {
               sx={{ display: 'flex', flexDirection: 'column', gap: '40px' }}
             >
               {/* <FilterLocation /> */}
-              <FilterLevel />
-              <FilterWorkType />
+              <FilterLevel
+                listLevel={listLevel}
+                checkedLevel={checkedLevel}
+                setCheckedLevel={setCheckedLevel}
+              />
+              <FilterWorkType
+                listWorkType={listWorkType}
+                checkedWorkType={checkedWorkType}
+                setCheckedWorkType={setCheckedWorkType}
+              />
               {/* <FilterSalary /> */}
             </Grid>)
             :
@@ -122,9 +151,16 @@ const FindJobList = () => {
                 </Typography>
               </Box>
 
-              <Box>
-                <Typography>Sort by: </Typography>
-              </Box>
+              <Stack direction="row" spacing={2} alignItems="center">
+                <Typography>Sort by Latest: </Typography>
+                <ToggleButton
+                  value="check"
+                  selected={selected}
+                  onChange={() => setSelected(!selected)}
+                >
+                  <ViewListIcon />
+                </ToggleButton>
+              </Stack>
             </Box>
 
             {/* List Jobs */}

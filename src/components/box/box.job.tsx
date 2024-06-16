@@ -94,10 +94,6 @@ const BoxJob = (props: IProps) => {
             </Stack>
           </Box>
         </Stack>
-
-        {/* <Box> */}
-        <ButtonStyle>Apply</ButtonStyle>
-        {/* </Box> */}
       </Box>
     </Link>
   )

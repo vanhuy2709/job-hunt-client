@@ -9,7 +9,6 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import SearchIcon from "@mui/icons-material/Search";
 import LocationOn from "@mui/icons-material/LocationOn";
-
 import AppTextHeading from "../content/app.text.heading";
 import AppSubtitle from "../content/app.subtitle";
 import { epilogue } from "@/lib/font";
@@ -46,7 +45,7 @@ const FindJobHero = (props: IProps) => {
   const handleSearch = () => {
 
     const objSearch = {} as any;
-    
+
     if (skill && skill.trim()) {
       objSearch.skill = skill.trim();
     }
@@ -115,15 +114,15 @@ const FindJobHero = (props: IProps) => {
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
               >
-                {listLocation && 
-                listLocation.length > 0 && 
-                listLocation.map(item => (
-                  <MenuItem key={item._id} 
-                    value={item.name}
-                  >
-                    {item.name}
-                  </MenuItem>
-                ))}
+                {listLocation &&
+                  listLocation.length > 0 &&
+                  listLocation.map(item => (
+                    <MenuItem key={item._id}
+                      value={item.name}
+                    >
+                      {item.name}
+                    </MenuItem>
+                  ))}
               </Select>
             </FormControl>
           </Box>

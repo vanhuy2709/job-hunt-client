@@ -11,31 +11,36 @@ import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
-import { sendRequest } from "@/utils/api";
 
-const FilterLevel = () => {
+interface IProps {
+  listLevel: ILevel[] | undefined;
+  checkedLevel: string[];
+  setCheckedLevel: (v: string[]) => void;
+}
+
+const FilterLevel = (props: IProps) => {
+  const { listLevel, checkedLevel, setCheckedLevel } = props;
   const [open, setOpen] = useState(true);
-  const [listLevel, setListLevel] = useState<Array<ILevel>>([]);
+  // const [checked, setChecked] = useState<Array<string>>([]);
 
   const handleClick = () => {
     setOpen(!open);
   };
 
-  // Get data level
-  const getDataLevel = async () => {
-    const res = await sendRequest<IBackendRes<ILevel[]>>({
-      method: 'GET',
-      url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/levels/list`
-    })
+  const handleChecked = (name: string) => {
 
-    if (res && res.data) {
-      setListLevel(res.data);
-    }
+    // @ts-ignore
+    setCheckedLevel(prev => {
+      const isChecked = checkedLevel.includes(name);
+
+      if (isChecked) {
+        return checkedLevel.filter(item => item !== name);
+      } else {
+        return [...prev, name];
+      }
+    });
   }
 
-  useEffect(() => {
-    getDataLevel();
-  }, [])
 
   return (
     <List sx={{ width: '100%' }} disablePadding>
@@ -57,17 +62,20 @@ const FilterLevel = () => {
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <FormGroup>
-          {listLevel.map(level => (
-            <FormControlLabel
-              key={level._id}
-              control={<Checkbox sx={{
-                "&.Mui-checked": {
-                  color: '#4640DE'
-                }
-              }} />}
-              label={level.name}
-            />
-          ))}
+          {listLevel && listLevel.length > 0 &&
+            listLevel.map(level => (
+              <FormControlLabel
+                key={level._id}
+                control={<Checkbox sx={{
+                  "&.Mui-checked": {
+                    color: '#4640DE'
+                  }
+                }} />}
+                label={level.name}
+                checked={checkedLevel.includes(level.name)}
+                onChange={() => handleChecked(level.name)}
+              />
+            ))}
         </FormGroup>
       </Collapse>
     </List>
