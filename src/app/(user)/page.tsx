@@ -20,7 +20,7 @@ const HomePage = async () => {
     queryParams: {
       current: 1,
       pageSize: 8
-    }
+    },
   })
 
   // Get Data Jobs

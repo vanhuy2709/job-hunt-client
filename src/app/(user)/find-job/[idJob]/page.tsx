@@ -7,6 +7,8 @@ import JobDetailCompany from "@/components/job/job.detail.company";
 import HomeLatest from "@/components/homepage/home.latest";
 import { sendRequest } from "@/utils/api";
 import { Metadata, ResolvingMetadata } from "next";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 type Props = {
   params: { idJob: string }
@@ -35,7 +37,6 @@ export async function generateMetadata(
 }
 
 const JobDetail = async ({ params }: { params: { idJob: string } }) => {
-
   const temp = params?.idJob?.split('.html') ?? [];
   const temp1 = temp[0]?.split('-') ?? [];
   const jobId = temp1[temp1.length - 1]
@@ -43,7 +44,7 @@ const JobDetail = async ({ params }: { params: { idJob: string } }) => {
   // Get Data Job by ID
   const res = await sendRequest<IBackendRes<IJob>>({
     method: 'GET',
-    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/jobs/${jobId}`
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/jobs/${jobId}`,
   })
 
   return (

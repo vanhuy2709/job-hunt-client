@@ -9,3 +9,6 @@ export default function NextAuthWrapper({ children }: { children: React.ReactNod
     </SessionProvider>
   );
 }
+
+// Client: const {session} = useSession()
+// Server: const session = await getServerSession(authOptions)

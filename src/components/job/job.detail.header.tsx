@@ -10,6 +10,8 @@ import AppHeadline from "../content/app.headline";
 import { epilogue } from "@/lib/font";
 import ModalApplyJob from "../modal/modal.apply.job";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 // Bull
 const bull = (
@@ -22,6 +24,7 @@ const bull = (
       color: '#CBCED4'
     }}>•</Box>
 );
+
 interface IProps {
   job: IJob | undefined;
 }
@@ -30,6 +33,8 @@ const JobDetailHeader = (props: IProps) => {
   const { job } = props;
   const matches = useMediaQuery('(min-width:600px)');
   const [openModalApply, setOpenModalApply] = useState(false);
+  const { data: session } = useSession();
+  const router = useRouter();
 
   return (
     <>
@@ -85,7 +90,13 @@ const JobDetailHeader = (props: IProps) => {
             </Box>
           </Box>
 
-          <ButtonStyle onClick={() => setOpenModalApply(true)}>
+          <ButtonStyle onClick={() => {
+            if (!session) {
+              router.push('/auth/signin')
+            } else {
+              setOpenModalApply(true)
+            }
+          }}>
             Apply
           </ButtonStyle>
         </Box>
@@ -94,6 +105,8 @@ const JobDetailHeader = (props: IProps) => {
       <ModalApplyJob
         openModalApply={openModalApply}
         setOpenModalApply={setOpenModalApply}
+        job={job}
+        user={session?.user}
       />
     </>
   )
