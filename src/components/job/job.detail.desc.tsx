@@ -1,3 +1,4 @@
+'use client';
 import Box from "@mui/material/Box";
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -6,18 +7,22 @@ import Chip from "@mui/material/Chip";
 import AppHeadline from "@/components/content/app.headline";
 import { epilogue } from "@/lib/font";
 import { formatNumberWithCommas } from "@/utils/formatNumberWithCommas";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 interface IProps {
   job: IJob | undefined;
 }
 const JobDetailDesc = (props: IProps) => {
+  const matches = useMediaQuery('(min-width:600px)');
   const { job } = props;
+
   return (
     <Stack
       direction={{ xs: 'column', sm: 'column', md: 'row' }}
       spacing={'64px'}
       justifyContent={'space-between'}
       py={'72px'}
+      px={matches ? 0 : 2}
     >
       <Stack direction={"column"} spacing={'40px'} flex={2}>
         <Box sx={{
@@ -91,33 +96,7 @@ const JobDetailDesc = (props: IProps) => {
         </Stack>
 
         <Divider />
-        <Box>
-          <AppHeadline text="Categories" />
-          <Stack direction={'row'} spacing={1} mt={'24px'}>
-            <Chip
-              label="Marketing"
-              sx={{
-                color: '#FFB836',
-                backgroundColor: '#FDF3EB',
-                fontFamily: epilogue.style,
-                fontSize: '14px',
-                fontWeight: 600,
-                lineHeight: '160%'
-              }} />
-            <Chip
-              label="Design"
-              sx={{
-                color: '#56CDAD',
-                backgroundColor: '#EFFAF7',
-                fontFamily: epilogue.style,
-                fontSize: '14px',
-                fontWeight: 600,
-                lineHeight: '160%'
-              }} />
-          </Stack>
-        </Box>
 
-        <Divider />
         <Box>
           <AppHeadline text="Required Skills" />
           <Stack direction={'row'} spacing={1} flexWrap={"wrap"} useFlexGap mt={'15px'}>

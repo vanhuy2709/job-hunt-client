@@ -1,8 +1,10 @@
+'use client'
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Image from "next/image";
 import AppHeadline from "@/components/content/app.headline";
 import ButtonLink from "@/components/button/button.link";
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 interface IProps {
   company: {
@@ -13,14 +15,17 @@ interface IProps {
 }
 const JobDetailCompany = (props: IProps) => {
   const { company } = props;
+  const matches = useMediaQuery('(min-width:600px)');
 
   return (
     <Stack
-      direction={'row'}
+      direction={{ xs: 'column', md: 'row' }}
       justifyContent={'space-between'}
       alignItems={'center'}
       spacing={4}
-      py={'72px'}>
+      py={'72px'}
+    >
+
       {/* Info */}
       <Box flex={1}>
         <Stack
@@ -41,24 +46,16 @@ const JobDetailCompany = (props: IProps) => {
             </ButtonLink>
           </Box>
         </Stack>
-
-        {/* <Typography sx={{
-          fontFamily: epilogue.style,
-          lineHeight: '160%',
-          color: '#515B6F'
-        }}>
-          Stripe is a technology company that builds economic infrastructure for the internet. Businesses of every size—from new startups to public companies—use our software to accept payments and manage their businesses online.
-        </Typography> */}
       </Box>
 
       {/* Image */}
-      <Box flex={1}>
+      <Box flex={1} sx={{ width: '100%', position: 'relative', pt: matches ? '500px' : '300px' }}>
         <Image
           src={'/sample/sample-1.jfif'}
           alt="logo-company"
-          width={500}
-          height={500}
-          style={{ objectFit: 'contain' }}
+          fill
+          sizes="100%"
+          style={{ width: '100%', height: '100%', top: 0, left: 0, objectFit: 'cover', }}
         />
       </Box>
     </Stack>

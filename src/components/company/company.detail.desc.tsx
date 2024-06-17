@@ -2,12 +2,10 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import AppHeadline from "../content/app.headline";
-import { epilogue } from "@/lib/font";
 import TwitterIcon from '@mui/icons-material/Twitter';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import { ImageList, ImageListItem } from "@mui/material";
-import Image from "next/image";
+import { epilogue } from "@/lib/font";
 
 interface IProps {
   description: string | undefined;
@@ -19,7 +17,7 @@ const CompanyDetailDesc = (props: IProps) => {
 
   return (
     <>
-      <Stack direction={'row'} spacing={8}>
+      <Stack direction={{ xs: 'column', md: 'row' }} spacing={8}>
         <Stack direction={'column'} spacing={3} flex={1.7}>
           <Box>
             <AppHeadline text="Company Profile" />

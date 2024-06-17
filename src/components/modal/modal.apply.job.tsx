@@ -1,3 +1,4 @@
+'use client';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
@@ -10,23 +11,24 @@ import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import { styled } from '@mui/material/styles';
 import Image from 'next/image';
-
+import { useSession } from 'next-auth/react';
 import { clashDisplay, epilogue } from '@/lib/font';
 import { ButtonStyle } from '@/styles/ButtonStyle';
 import { IUserAuth } from '@/types/next-auth';
 import { useState } from 'react';
 import { sendRequest } from '@/utils/api';
+import axios from 'axios';
 
 const style = {
   position: 'absolute' as 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 644,
+  width: { xs: 330, sm: 644 },
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
-  p: 4,
+  p: { xs: 2, sm: 4 },
 };
 
 const VisuallyHiddenInput = styled('input')({
@@ -49,6 +51,7 @@ interface IProps {
 }
 
 const ModalApplyJob = (props: IProps) => {
+  const { data: session } = useSession();
   const { openModalApply, setOpenModalApply, job, user } = props;
   const [file, setFile] = useState<File>();
   const [note, setNote] = useState<string>('');
@@ -60,33 +63,53 @@ const ModalApplyJob = (props: IProps) => {
   // Create Resume
   const handleSubmitResume = async () => {
 
-    const newResume = {
-      userId: user?._id,
-      url: file,
-      companyId: job?.company._id,
-      jobId: job?._id,
-      note
+    // Upload CV
+    const formData = new FormData();
+    // @ts-ignore
+    formData.append('fileUpload', file);
+
+    try {
+      const res = await axios.post
+        (
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/files/upload`, formData, {
+          headers: {
+            Authorization: `Bearer ${session?.access_token}`,
+            'folder_type': 'ImgCV',
+          },
+        })
+
+      if (res.data) {
+
+        // Create resumse
+        const newResume = {
+          url: res.data.data,
+          note,
+          companyId: job?.company._id,
+          jobId: job?._id,
+        }
+
+        const response = await sendRequest<IBackendRes<IResume>>({
+          method: 'POST',
+          url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/resumes`,
+          body: newResume,
+          headers: { Authorization: `Bearer ${session?.access_token}`, }
+        })
+
+        if (response.data) {
+          setOpenMessage(true);
+          setMessage(`Apply to ${job?.name} success`);
+          setStatusMessage(true);
+          setOpenModalApply(false);
+        }
+      }
+
+    } catch (error) {
+      // @ts-ignore
+      alert(error?.response?.data?.message);
     }
 
-    // Call API
-    const res = await sendRequest<IBackendRes<IResume>>({
-      method: 'POST',
-      url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/resumes`,
-      body: newResume
-    })
-
-    if (res.data) {
-      setOpenMessage(true);
-      setMessage(`Apply to ${job?.name} success`);
-      setOpenModalApply(false);
-      setStatusMessage(true);
-    }
-    else {
-      setOpenMessage(true);
-      setMessage(`Apply to ${job?.name} failed`);
-      setStatusMessage(false);
-    }
   }
+
 
   // Handle upload file
   const handleUploadFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -95,24 +118,22 @@ const ModalApplyJob = (props: IProps) => {
     }
   }
 
-  console.log('check file: ', file);
-
   return (
     <>
       <Modal
         open={openModalApply}
         onClose={() => setOpenModalApply(false)}
       >
-        <Stack sx={style} direction={'column'} gap={'32px'}>
+        <Stack sx={style} direction={'column'} gap={'32px'} >
           {/* Header */}
-          <Stack direction={'row'} gap={'24px'} alignItems={'center'}>
+          <Stack direction={{ xs: 'column', sm: 'row' }} gap={'24px'} alignItems={'center'}>
             <Image
               src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/images/company/${job?.company.logo}`}
               alt='logo-company'
               width={80}
               height={80}
             />
-            <Box>
+            <Box textAlign={{ xs: 'center', sm: 'unset' }}>
               <Typography sx={{
                 fontFamily: clashDisplay.style,
                 fontSize: '24px',
@@ -145,7 +166,7 @@ const ModalApplyJob = (props: IProps) => {
             <Typography sx={{
               color: '#515B6F',
               fontFamily: epilogue.style,
-              fontSize: '18px',
+              fontSize: { xs: '16px', sm: '18px' },
               fontWeight: 400,
               lineHeight: '160%',
             }}>The following is required and will only be shared with {job?.company.name}</Typography>

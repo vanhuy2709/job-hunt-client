@@ -25,7 +25,7 @@ const BoxJobFeatured = (props: IProps) => {
   const { item } = props;
 
   return (
-    <Link href={`/find-job/${convertSlugUrl(item.name)}-${item._id}.html`} style={{ textDecoration: 'none' }}>
+    <Link href={`/find-job/${convertSlugUrl(item.name)}-${item._id}.html`} style={{ textDecoration: 'none', color: 'unset' }}>
       <Box sx={{
         p: '24px',
         border: 1,

@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import AppTitle from "../content/app.title";
 import ButtonLink from "../button/button.link";
-import BoxCategory from "../box/box.category";
+import BoxSkill from "../box/box.skill";
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 interface IProps {
@@ -36,7 +36,7 @@ const HomeSkill = (props: IProps) => {
         >
           {data && data?.length > 0 && data?.map(item => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={item._id}>
-              <BoxCategory item={item} />
+              <BoxSkill item={item} />
             </Grid>
           ))}
         </Grid>
