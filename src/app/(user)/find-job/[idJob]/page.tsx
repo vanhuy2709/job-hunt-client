@@ -24,7 +24,8 @@ export async function generateMetadata(
   // fetch data
   const res = await sendRequest<IBackendRes<IJob>>({
     method: 'GET',
-    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/jobs/${jobId}`
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/jobs/${jobId}`,
+    nextOption: { cache: 'no-store' }
   })
 
   return {
@@ -42,6 +43,7 @@ const JobDetail = async ({ params }: { params: { idJob: string } }) => {
   const res = await sendRequest<IBackendRes<IJob>>({
     method: 'GET',
     url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/jobs/${jobId}`,
+    nextOption: { cache: 'no-store' }
   })
 
   return (

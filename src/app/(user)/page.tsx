@@ -21,6 +21,7 @@ const HomePage = async () => {
       current: 1,
       pageSize: 8
     },
+    nextOption: { cache: 'no-store' }
   })
 
   // Get Data Jobs
@@ -30,7 +31,8 @@ const HomePage = async () => {
     queryParams: {
       current: 1,
       pageSize: 8
-    }
+    },
+    nextOption: { cache: 'no-store' }
   })
 
   // Get Data Jobs Latest
@@ -41,13 +43,15 @@ const HomePage = async () => {
       current: 1,
       pageSize: 8,
       sort: '-updatedAt'
-    }
+    },
+    nextOption: { cache: 'no-store' }
   })
 
   // Get Data Location
   const location = await sendRequest<IBackendRes<ILocation[]>>({
     url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/locations/list`,
     method: 'GET',
+    nextOption: { cache: 'no-store' }
   })
 
   return (

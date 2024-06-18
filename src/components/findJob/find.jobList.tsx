@@ -60,6 +60,7 @@ const FindJobList = (props: IProps) => {
         levels: checkedLevel.length > 0 ? JSON.stringify(checkedLevel) : '',
         sort: selected ? '-updatedAt' : 'updatedAt'
       },
+      nextOption: { cache: 'no-store' }
     })
 
     if (res.data) {
@@ -86,7 +87,8 @@ const FindJobList = (props: IProps) => {
         workTypes: checkedWorkType.length > 0 ? JSON.stringify(checkedWorkType) : '',
         levels: checkedLevel.length > 0 ? JSON.stringify(checkedLevel) : '',
         sort: selected ? '-updatedAt' : 'updatedAt'
-      }
+      },
+      nextOption: { cache: 'no-store' }
     })
 
     if (res.data) {

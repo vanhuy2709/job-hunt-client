@@ -22,7 +22,8 @@ export async function generateMetadata(
   // fetch data
   const res = await sendRequest<IBackendRes<ICompany>>({
     method: 'GET',
-    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/companies/${companyId}`
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/companies/${companyId}`,
+    nextOption: { cache: 'no-store' }
   })
 
   return {
@@ -40,7 +41,8 @@ const CompanyDetail = async ({ params }: { params: { idCompany: string } }) => {
   // Get Data Company by ID
   const res = await sendRequest<IBackendRes<ICompany>>({
     method: 'GET',
-    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/companies/${companyId}`
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/companies/${companyId}`,
+    nextOption: { cache: 'no-store' }
   })
 
   return (

@@ -28,7 +28,8 @@ const FilterLocation = () => {
   const getDataLocation = async () => {
     const res = await sendRequest<IBackendRes<ILocation[]>>({
       method: 'GET',
-      url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/locations/list`
+      url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/locations/list`,
+      nextOption: { cache: 'no-store' }
     })
 
     if (res?.data) {

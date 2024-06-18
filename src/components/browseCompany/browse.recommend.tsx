@@ -27,7 +27,8 @@ const BrowseRecommend = () => {
       queryParams: {
         current: meta.current,
         pageSize: meta.pageSize,
-      }
+      },
+      nextOption: { cache: 'no-store' }
     })
 
     if (res.data) {
@@ -49,7 +50,8 @@ const BrowseRecommend = () => {
       queryParams: {
         current: value,
         pageSize: meta.pageSize,
-      }
+      },
+      nextOption: { cache: 'no-store' }
     })
 
     if (res.data) {
