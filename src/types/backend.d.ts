@@ -82,8 +82,16 @@ declare global {
     userId: string,
     url: string,
     status: string,
-    companyId: string,
-    jobId: string,
+    companyId: {
+      _id: string;
+      name: string;
+      logo: string;
+    },
+    jobId: {
+      _id: string;
+      name: string;
+      salary: number;
+    },
     history: IHistory[],
     createdBy: {
       _id: string,
@@ -154,6 +162,26 @@ declare global {
     deletedAt: string,
     createdAt: string,
     updatedAt: string,
+  }
+
+  interface IManage {
+    _id: string;
+    jobTitle: string;
+    dateInterview: string;
+    email: string;
+    name: string;
+    linkMeet: string;
+    urlCV: string;
+    userIdInterviewer: string;
+    userIdCandidate: string;
+    createdBy: {
+      _id: string;
+      email: string;
+    },
+    deletedAt: Date;
+    isDeleted: boolean;
+    createdAt: string;
+    updatedAt: string;
   }
 
   interface IRequest {

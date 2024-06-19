@@ -37,25 +37,6 @@ const FilterLocation = () => {
     }
   }
 
-  // Handle check location
-  // const [locationListCheck, setLocationListCheck] = useState<Array<string>>([]);
-
-  // const handleCheckLocation = (locationName: string) => {
-
-  //   setLocationListCheck(prev => {
-  //     const isChecked = locationListCheck.includes(locationName);
-
-  //     if (isChecked) {
-  //       // Uncheck
-  //       return locationListCheck.filter(item => item !== locationName);
-
-  //     } else {
-  //       return [...prev, locationName];
-  //     }
-  //   })
-  // }
-  // console.log('check list location: ', locationListCheck);
-
   useEffect(() => {
     getDataLocation();
   }, [])

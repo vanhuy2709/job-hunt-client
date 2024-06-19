@@ -18,5 +18,4 @@ export const epilogue = Epilogue({
 
 export const clashDisplay = localFont({
   src: '../app/font/clash-display/ClashDisplaySemibold.otf',
-  display: 'swap'
 })

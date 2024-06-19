@@ -217,7 +217,10 @@ const AppHeader = () => {
                     }}
                   >
                     {/* <MenuItem onClick={() => callCreateSpace()}>Profile</MenuItem> */}
-                    <MenuItem onClick={() => router.push('/my-account')}>My account</MenuItem>
+                    <MenuItem onClick={() => {
+                      handleCloseUserMenu();
+                      router.push('/my-account')
+                    }}>My account</MenuItem>
                     <MenuItem onClick={() => {
                       handleCloseUserMenu();
                       signOut();

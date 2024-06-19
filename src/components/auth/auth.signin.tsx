@@ -196,7 +196,9 @@ const AuthSignIn = () => {
                     px: '16px',
                     width: '100%',
                     mb: 1
-                  }}>
+                  }}
+                  onClick={() => signIn('google')}
+                >
                   <Typography sx={{
                     fontFamily: epilogue.style,
                     color: '#4640DE',
