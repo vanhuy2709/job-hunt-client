@@ -9,9 +9,10 @@ import { epilogue } from "@/lib/font"
 import BoxCompany from "../box/box.company";
 import { sendRequest } from "@/utils/api"
 import { useEffect, useState } from "react";
-
+import { useSearchParams } from "next/navigation";
 
 const BrowseRecommend = () => {
+  const searchParams = useSearchParams();
   const [listCompany, setListCompany] = useState<ICompany[]>();
   const [meta, setMeta] = useState({
     current: 1,
@@ -27,6 +28,7 @@ const BrowseRecommend = () => {
       queryParams: {
         current: meta.current,
         pageSize: meta.pageSize,
+        name: name ? name : ''
       },
       nextOption: { cache: 'no-store' }
     })
@@ -50,6 +52,7 @@ const BrowseRecommend = () => {
       queryParams: {
         current: value,
         pageSize: meta.pageSize,
+        name: name ? name : ''
       },
       nextOption: { cache: 'no-store' }
     })
@@ -65,9 +68,12 @@ const BrowseRecommend = () => {
     }
   };
 
+  // Filter Skill
+  const name = searchParams.get('name');
+
   useEffect(() => {
     getDataCompany();
-  }, [])
+  }, [searchParams])
 
   return (
     <Box py={'72px'}>

@@ -9,13 +9,31 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 import AppTextHeading from "@/components/content/app.text.heading";
 import AppSubtitle from "@/components/content/app.subtitle";
-import ButtonStyle from "@/components/button/button.style";
 import { epilogue } from "@/lib/font";
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { ButtonStyle } from "@/styles/ButtonStyle";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const BrowseHero = () => {
 
   const matches = useMediaQuery('(min-width:600px)');
+  const router = useRouter();
+
+  const [name, setName] = useState<string>('');
+
+  // Handle submit search company
+  const handleSearch = () => {
+    const objSearch = {} as any;
+
+    if (name) {
+      objSearch.name = name;
+    }
+
+    const urlParams = new URLSearchParams(objSearch);
+
+    router.push(`/browse-companies?${urlParams.toString()}`)
+  }
 
   return (
     <Box bgcolor={'#F8F8FD'} py={'65px'}>
@@ -36,7 +54,17 @@ const BrowseHero = () => {
           {/* Input 1 */}
           <Box sx={{ display: 'flex', alignItems: 'flex-end', flex: 1 }}>
             <SearchIcon sx={{ mx: { xs: 1, sm: 2 }, my: 0.5 }} />
-            <TextField label="Company name or keyword" variant="standard" fullWidth />
+            <TextField
+              label="Company name or keyword"
+              variant="standard"
+              fullWidth
+              onChange={(e) => setName(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleSearch()
+                }
+              }}
+            />
           </Box>
 
           {matches ?
@@ -44,12 +72,16 @@ const BrowseHero = () => {
             :
             (<></>)}
 
-          <Box sx={{ display: 'flex', alignItems: 'flex-end', flex: 1 }}>
+          {/* <Box sx={{ display: 'flex', alignItems: 'flex-end', flex: 1 }}>
             <LocationOnIcon sx={{ mx: { xs: 1, sm: 2 }, my: 0.5 }} />
             <TextField label="Location" variant="standard" fullWidth />
-          </Box>
+          </Box> */}
 
-          <ButtonStyle>Search</ButtonStyle>
+          <ButtonStyle
+            onClick={() => handleSearch()}
+          >
+            Search
+          </ButtonStyle>
         </Box>
 
         <Typography sx={{
